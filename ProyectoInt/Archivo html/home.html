@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicio - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .post-container {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 48px 0;
+    }
+    .post {
+      background-color: var(--card-bg);
+      padding: 56px 64px;
+      border-radius: 32px;
+      box-shadow: 0 12px 48px rgba(255,179,71,0.15);
+      border: 2px solid var(--border);
+      position: relative;
+      font-size: 1.25rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      min-width: 0;
+      animation: fadeUpCard 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .post h3 {
+      font-size: 1.7rem;
+      color: var(--primary-dark);
+      margin-bottom: 22px;
+      font-weight: 700;
+    }
+    .post p {
+      margin: 18px 0;
+      font-size: 1.22rem;
+      color: var(--text-main);
+    }
+    .post img {
+      max-width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin: 24px 0;
+      box-shadow: 0 4px 18px rgba(255,179,71,0.13);
+    }
+    .btn-like, .btn-toggle-comments {
+      font-size: 1.18rem;
+      padding: 14px 32px;
+      border-radius: 12px;
+      margin-right: 14px;
+      margin-top: 16px;
+    }
+    .comment-section {
+      margin-top: 24px;
+      padding: 22px 28px;
+      background: #fff3cd;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+    }
+    .comment-list p {
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 14px 18px;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1.08rem;
+      background: #fff3cd;
+      color: var(--text-main);
+    }
+    .btn-add-comment {
+      margin-top: 14px;
+      padding: 12px 28px;
+      font-size: 1.08rem;
+      border-radius: 10px;
+    }
+    @media (max-width: 1100px) {
+      .post-container {
+        max-width: 99vw;
+        padding: 24px 0;
+      }
+      .post {
+        padding: 32px 4vw;
+      }
+    }
+    @media (max-width: 700px) {
+      .post {
+        padding: 18px 2vw;
+        border-radius: 14px;
+      }
+      .post h3 {
+        font-size: 1.15rem;
+      }
+      .post p {
+        font-size: 1rem;
+      }
+      .btn-like, .btn-toggle-comments, .btn-add-comment {
+        font-size: 0.98rem;
+        padding: 8px 10px;
+      }
+      .comment-section {
+        padding: 10px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="time" id="hora-actual">00:00</span>
+    <input class="search-bar" placeholder="Buscar..." />
+  </header>
+
+  <main>
+    <div class="post-container">
+
+      <div class="post">
+        <h3>Erika · Hace 3 min</h3>
+        <img src="images/muro.jpg" alt="Muro con daño" />
+        <p>¿Alguien que me pueda arreglar esta imperfección?</p>
+        <button class="btn-like">❤️ <span class="like-count">21</span> Me gusta</button>
+        <button class="btn-toggle-comments">💬 <span class="comment-count">2</span> Comentarios</button>
+        <div class="comment-section" style="display: none;">
+          <div class="comment-list">
+            <p><strong>Carmen:</strong> Yo conozco a alguien en tu zona.</p>
+            <p><strong>Miguel:</strong> Tengo herramientas, te puedo ayudar.</p>
+          </div>
+          <input type="text" class="comment-input" placeholder="Escribe un comentario..." />
+          <button class="btn-add-comment">Enviar</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <h3>Daniel · Hace 2 horas</h3>
+        <p>¿Podrían recomendarme a algún plomero de confianza en la zona?</p>
+        <button class="btn-like">❤️ <span class="like-count">10</span> Me gusta</button>
+        <button class="btn-toggle-comments">💬 <span class="comment-count">2</span> Comentarios</button>
+        <div class="comment-section" style="display: none;">
+          <div class="comment-list">
+            <p><strong>Daniel:</strong> Yo te puedo recomendar a alguien.</p>
+            <p><strong>Paco:</strong> Yo te puedo ayudar.</p>
+          </div>
+          <input type="text" class="comment-input" placeholder="Escribe un comentario..." />
+          <button class="btn-add-comment">Enviar</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <h3>Carla · Hace 1 día</h3>
+        <img src="images/jardin.jpg" alt="Jardín descuidado" />
+        <p>Necesito ayuda para limpiar mi jardín. ¿Alguien disponible este fin de semana?</p>
+        <button class="btn-like">❤️ 12 Me gusta</button>
+        <button class="btn-toggle-comments">💬 2 Comentarios</button>
+      </div>
+
+      <div class="post">
+        <h3>Marco · Hace 3 días</h3>
+        <p>¿Conocen a alguien que repare refrigeradores? El mío dejó de enfriar ayer.</p>
+        <button class="btn-like">❤️ <span class="like-count">9</span> Me gusta</button>
+        <button class="btn-toggle-comments">💬 <span class="comment-count">2</span> Comentarios</button>
+        <div class="comment-section" style="display: none;">
+          <div class="comment-list">
+            <p><strong>Andrea:</strong> Mi primo repara refrigeradores, te paso el contacto.</p>
+            <p><strong>Lucas:</strong> Te puedo ayudar el sábado si quieres.</p>
+          </div>
+          <input type="text" class="comment-input" placeholder="Escribe un comentario..." />
+          <button class="btn-add-comment">Enviar</button>
+        </div>
+      </div>
+
+      <div class="post">
+        <h3>Ana · Hace 1 semana</h3>
+        <img src="images/pintura.jpg" alt="Muro a pintar" />
+        <p>Quisiera pintar este muro con un color cálido. ¿Algún pintor disponible?</p>
+        <button class="btn-like">❤️ <span class="like-count">15</span> Me gusta</button>
+        <button class="btn-toggle-comments">💬 <span class="comment-count">2</span> Comentarios</button>
+        <div class="comment-section" style="display: none;">
+          <div class="comment-list">
+            <p><strong>Carmen:</strong> Yo te puedo ayudar, soy pintora.</p>
+          </div>
+          <input type="text" class="comment-input" placeholder="Escribe un comentario..." />
+          <button class="btn-add-comment">Enviar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Botón flotante para añadir publicación -->
+  <div class="floating-add-btn" onclick="mostrarModalPublicacion()">
+    <span>+</span>
+  </div>
+
+  <!-- Modal para añadir publicación -->
+  <div id="modalPublicacion" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Nueva Publicación</h2>
+      <p class="precio-info">💰 Costo: $20.00 MXN</p>
+      
+      <form id="formPublicacion">
+        <div class="form-group">
+          <label for="titulo">Título de la publicación</label>
+          <input type="text" id="titulo" placeholder="¿Qué necesitas?" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" placeholder="Describe tu solicitud..." rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="imagen">Imagen (opcional)</label>
+          <input type="file" id="imagen" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" required>
+            <option value="">Selecciona una categoría</option>
+            <option value="hogar">Hogar y Jardín</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="transporte">Transporte</option>
+            <option value="salud">Salud y Bienestar</option>
+            <option value="educacion">Educación</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" placeholder="Tu ciudad o zona" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contacto">Contacto</label>
+          <input type="text" id="contacto" placeholder="Teléfono o correo" required>
+        </div>
+        
+        <div class="pago-section">
+          <h3>Información de Pago</h3>
+          <p>Para publicar tu solicitud, se cobrará una tarifa de $20.00 MXN</p>
+          
+          <div class="metodos-pago">
+            <label>
+              <input type="radio" name="metodoPago" value="tarjeta" required>
+              💳 Tarjeta de Crédito/Débito
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="paypal" required>
+              🅿️ PayPal
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="transferencia" required>
+              🏦 Transferencia Bancaria
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>
+          <button type="submit" class="btn-publicar">Publicar ($20.00)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bottom-nav">
+    <button onclick="location.href='home.html'">Inicio</button>
+    <button onclick="location.href='buscar.html'">Buscar</button>
+    <button onclick="location.href='mensajes.html'">Mensajes</button>
+    <button onclick="location.href='perfil.html'">Perfil</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

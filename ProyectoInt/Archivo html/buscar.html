@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buscar - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <span class="time" id="hora-actual">00:00</span>
+    <div class="search-container">
+      <input class="search-bar" id="searchInput" placeholder="Buscar publicaciones, trabajadores..." />
+      <button class="search-btn" onclick="realizarBusqueda()">🔍</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Filtros de búsqueda -->
+    <div class="filters-section">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="todo" onclick="cambiarFiltro('todo')">
+          🔍 Todo
+        </button>
+        <button class="filter-tab" data-filter="publicaciones" onclick="cambiarFiltro('publicaciones')">
+          📝 Publicaciones
+        </button>
+        <button class="filter-tab" data-filter="trabajadores" onclick="cambiarFiltro('trabajadores')">
+          👷 Trabajadores
+        </button>
+        <button class="filter-tab" data-filter="categorias" onclick="cambiarFiltro('categorias')">
+          🏷️ Categorías
+        </button>
+      </div>
+
+      <div class="advanced-filters">
+        <select id="categoriaFilter" class="filter-select">
+          <option value="">Todas las categorías</option>
+          <option value="hogar">Hogar y Jardín</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="transporte">Transporte</option>
+          <option value="salud">Salud y Bienestar</option>
+          <option value="educacion">Educación</option>
+          <option value="otros">Otros</option>
+        </select>
+
+        <select id="ubicacionFilter" class="filter-select">
+          <option value="">Todas las ubicaciones</option>
+          <option value="tula">Tula de Allende</option>
+          <option value="pachuca">Pachuca</option>
+          <option value="mexico">Ciudad de México</option>
+          <option value="queretaro">Querétaro</option>
+          <option value="toluca">Toluca</option>
+        </select>
+
+        <button class="btn-limpiar" onclick="limpiarFiltros()">
+          🗑️ Limpiar filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Resultados de búsqueda -->
+    <div class="search-results">
+      <div class="results-header">
+        <h2 id="resultsTitle">Resultados de búsqueda</h2>
+        <span id="resultsCount" class="results-count">0 resultados encontrados</span>
+      </div>
+
+      <!-- Contenedor de resultados -->
+      <div id="resultsContainer" class="results-container">
+        <!-- Los resultados se cargarán dinámicamente aquí -->
+      </div>
+
+      <!-- Estado de carga -->
+      <div id="loadingState" class="loading-state" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Buscando...</p>
+      </div>
+
+      <!-- Estado sin resultados -->
+      <div id="noResultsState" class="no-results" style="display: none;">
+        <div class="no-results-icon">🔍</div>
+        <h3>No se encontraron resultados</h3>
+        <p>Intenta con otros términos de búsqueda o ajusta los filtros</p>
+        <button class="btn-sugerir" onclick="mostrarSugerencias()">
+          Ver sugerencias
+        </button>
+      </div>
+    </div>
+
+    <!-- Sugerencias populares -->
+    <div class="suggestions-section">
+      <h3>Búsquedas populares</h3>
+      <div class="suggestions-grid">
+        <button class="suggestion-tag" onclick="buscarPorTag('plomero')">🔧 Plomero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('electricista')">⚡ Electricista</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('jardinero')">🌱 Jardinero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('pintor')">🎨 Pintor</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('carpintero')">🔨 Carpintero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('mecanico')">🚗 Mecánico</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('limpieza')">🧹 Limpieza</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('reparacion')">🔧 Reparación</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Botón flotante para añadir publicación -->
+  <div class="floating-add-btn" onclick="mostrarModalPublicacion()">
+    <span>+</span>
+  </div>
+
+  <!-- Modal para añadir publicación -->
+  <div id="modalPublicacion" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Nueva Publicación</h2>
+      <p class="precio-info">💰 Costo: $20.00 MXN</p>
+      
+      <form id="formPublicacion">
+        <div class="form-group">
+          <label for="titulo">Título de la publicación</label>
+          <input type="text" id="titulo" placeholder="¿Qué necesitas?" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" placeholder="Describe tu solicitud..." rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="imagen">Imagen (opcional)</label>
+          <input type="file" id="imagen" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" required>
+            <option value="">Selecciona una categoría</option>
+            <option value="hogar">Hogar y Jardín</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="transporte">Transporte</option>
+            <option value="salud">Salud y Bienestar</option>
+            <option value="educacion">Educación</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" placeholder="Tu ciudad o zona" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contacto">Contacto</label>
+          <input type="text" id="contacto" placeholder="Teléfono o correo" required>
+        </div>
+        
+        <div class="pago-section">
+          <h3>Información de Pago</h3>
+          <p>Para publicar tu solicitud, se cobrará una tarifa de $20.00 MXN</p>
+          
+          <div class="metodos-pago">
+            <label>
+              <input type="radio" name="metodoPago" value="tarjeta" required>
+              💳 Tarjeta de Crédito/Débito
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="paypal" required>
+              🅿️ PayPal
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="transferencia" required>
+              🏦 Transferencia Bancaria
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>
+          <button type="submit" class="btn-publicar">Publicar ($20.00)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bottom-nav">
+    <button onclick="location.href='home.html'">Inicio</button>
+    <button onclick="location.href='mensajes.html'">Mensajes</button>
+    <button onclick="location.href='perfil.html'">Perfil</button>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="buscar.js"></script>
+</body>
+</html> 

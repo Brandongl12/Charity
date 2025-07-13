@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Configuración de Perfil - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="config-header">
+    <h2>Configuración de Perfil</h2>
+    <p>Actualiza tu información personal y mantén tu perfil al día.</p>
+  </header>
+
+  <main>
+    <section class="config-container">
+      <form id="form-configuracion" autocomplete="off">
+        <div class="config-section">
+          <label for="experiencia" class="config-label">Experiencia laboral</label>
+          <input type="text" id="experiencia" class="config-input" placeholder="Lugar de trabajo o actividad" />
+        </div>
+
+        <div class="config-section">
+          <label for="estudios" class="config-label">Estudios</label>
+          <input type="text" id="estudios" class="config-input" placeholder="Nivel de estudios" />
+        </div>
+
+        <div class="config-section">
+          <label for="ciudad" class="config-label">Ciudad</label>
+          <input type="text" id="ciudad" class="config-input" value="Tula de Allende Hidalgo" />
+        </div>
+
+        <div class="config-section">
+          <label for="telefono" class="config-label">Teléfono</label>
+          <input type="tel" id="telefono" class="config-input" value="77315978616" />
+        </div>
+
+        <div class="config-section">
+          <label for="correo" class="config-label">Correo electrónico</label>
+          <input type="email" id="correo" class="config-input" value="Danielceron546@gmail.com" />
+        </div>
+
+        <div class="config-section">
+          <label for="sexo" class="config-label">Sexo</label>
+          <select id="sexo" class="config-select">
+            <option value="masculino" selected>Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="config-section">
+          <label for="nacimiento" class="config-label">Fecha de nacimiento</label>
+          <input type="date" id="nacimiento" class="config-input" value="2006-08-31" />
+        </div>
+
+        <button type="submit" class="btn-config-save">Guardar Cambios</button>
+        <div id="mensaje-confirmacion" class="config-message" style="display:none;">
+          ✔ Tus datos se han actualizado correctamente.
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bottom-nav">
+    <button onclick="location.href='home.html'">Inicio</button>
+    <button onclick="location.href='buscar.html'">Buscar</button>
+    <button onclick="location.href='mensajes.html'">Mensajes</button>
+    <button onclick="location.href='perfil.html'">Perfil</button>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("form-configuracion");
+      const mensaje = document.getElementById("mensaje-confirmacion");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        mensaje.style.display = "block";
+        setTimeout(() => {
+          mensaje.style.display = "none";
+        }, 3000);
+      });
+    });
+  </script>
+
+</body>
+</html>

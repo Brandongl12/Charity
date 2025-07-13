@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio de Sesión - Charity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <body>
+  <main class="index-wrapper">
+    <section class="index-superior">
+      <img src="images/logo.png" alt="Logo de Charity" class="index-logo" />
+    </section>
+
+    <section class="index-inferior">
+      <h1 class="index-titulo">Bienvenido a Charity</h1>
+      <p class="index-descripcion">
+        Conecta a trabajadores, voluntarios y personas que necesitan ayuda en tu comunidad.
+      </p>
+
+      <div class="index-botones">
+        <button onclick="location.href='login.html'" class="btn-index">Iniciar sesión</button>
+        <button onclick="location.href='registro.html'" class="btn-index secundaria">Registrarse</button>
+      </div>
+    </section>
+  </main>
+</body>
+</body>
+<script>
+document.querySelectorAll('.btn-like').forEach(button => {
+  button.addEventListener('click', () => {
+    const countSpan = button.querySelector('.like-count');
+    let count = parseInt(countSpan.textContent);
+    count++;
+    countSpan.textContent = count;
+  });
+});
+
+document.querySelectorAll('.btn-comment-toggle').forEach((btn, i) => {
+  btn.addEventListener('click', () => {
+    const commentBox = btn.nextElementSibling;
+    commentBox.style.display = commentBox.style.display === 'none' ? 'block' : 'none';
+  });
+});
+
+document.querySelectorAll('.btn-add-comment').forEach((btn, i) => {
+  btn.addEventListener('click', () => {
+    const input = btn.previousElementSibling;
+    const text = input.value.trim();
+    if (text) {
+      const commentDiv = btn.parentElement.querySelector('.existing-comments');
+      const p = document.createElement('p');
+      p.innerHTML = `<strong>Tú:</strong> ${text}`;
+      commentDiv.appendChild(p);
+      input.value = '';
+
+      // Sumar comentario
+      const countSpan = btn.parentElement.previousElementSibling.querySelector('.comment-count');
+      let count = parseInt(countSpan.textContent);
+      count++;
+      countSpan.textContent = count;
+    }
+  });
+});
+</script>
+</html>

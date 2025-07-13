@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="auth-container">
+    <h2 class="auth-title">Crear una cuenta</h2>
+
+    <form class="auth-form" onsubmit="event.preventDefault(); location.href='home.html'">
+      <label for="foto">Foto de perfil</label>
+      <input type="file" id="foto" accept="image/*" />
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" placeholder="Nombre(s) y apellido(s)" required />
+
+      <label for="fecha">Fecha de nacimiento</label>
+      <input type="date" id="fecha" required />
+
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" placeholder="Ej. 7730000000" required />
+
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" placeholder="ejemplo@correo.com" required />
+
+      <label for="direccion">Dirección</label>
+      <input type="text" id="direccion" placeholder="Calle, ciudad, estado" required />
+
+      <label for="profesion">Profesión</label>
+      <input type="text" id="profesion" placeholder="Ej. Carpintero, Maestra, etc." required />
+
+      <button type="submit" class="btn-auth">Crear cuenta</button>
+
+      <p class="auth-link">
+        ¿Ya tienes cuenta?
+        <a href="login.html">Inicia sesión</a>
+      </p>
+    </form>
+  </main>
+
+</body>
+</html>
