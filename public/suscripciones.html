@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Suscripciones - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #181828;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .suscripciones-container {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 24px;
+      background: #23233a;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #0004;
+    }
+    .suscripcion-card {
+      background: #181828;
+      border-radius: 14px;
+      padding: 22px 18px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 12px #2d026722;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .suscripcion-card.pro {
+      border: 2px solid #a78bfa;
+      box-shadow: 0 4px 24px #a78bfa33;
+    }
+    .suscripcion-titulo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #a78bfa;
+      margin-bottom: 6px;
+    }
+    .suscripcion-insignia {
+      display: inline-block;
+      background: #a78bfa;
+      color: #fff;
+      font-size: 0.98rem;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 2px 10px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .suscripcion-beneficios {
+      margin: 0 0 8px 0;
+      padding-left: 18px;
+    }
+    .btn-suscribirse {
+      background: #a78bfa;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-suscribirse:hover {
+      background: #6d28d9;
+    }
+  </style>
+</head>
+<body>
+  <a href="perfil.html" style="display:inline-block;background:#6d28d9;color:#fff;padding:10px 22px;border:none;border-radius:8px;font-size:1rem;font-weight:500;text-decoration:none;margin-bottom:18px;">
+    ← Regresar al perfil
+  </a>
+  <div class="suscripciones-container">
+    <h2 style="text-align:center;margin-bottom:32px;">Elige tu suscripción</h2>
+    <div class="suscripcion-card">
+      <div class="suscripcion-titulo">Base</div>
+      <ul class="suscripcion-beneficios">
+        <li>Hasta <b>3 publicaciones</b> a la semana</li>
+        <li>Acceso a la plataforma básica</li>
+        <li>Publicaciones base con menos probabilidad de visibilidad</li>
+        <li>Sin insignia especial</li>
+      </ul>
+      <button class="btn-suscribirse">Seleccionar Base</button>
+    </div>
+    <div class="suscripcion-card pro" style="position:relative;overflow:hidden;">
+      <div style="position:absolute;top:0;right:0;background:#a78bfa;color:#fff;font-size:0.95rem;font-weight:700;padding:6px 18px 6px 18px;border-radius:0 14px 0 30px;letter-spacing:1px;">
+        PRO
+      </div>
+      <div class="suscripcion-titulo" style="margin-top:18px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.5rem;">✨</span>
+        Pro <span class="suscripcion-insignia">IA + Insignia</span>
+      </div>
+      <ul class="suscripcion-beneficios" style="margin-top:10px;">
+        <li><span style="color:#a78bfa;"></span> Las <b>publicaciones son ilimitadas</b> a la semana</li>
+        <li><span style="color:#a78bfa;"></span> Asistente con <b>inteligencia artificial</b> para mejorar tus oficios o encontrar personas</li>
+        <li><span style="color:#a78bfa;"></span> Insignia de usuario Pro</li>
+        <li><span style="color:#a78bfa;"></span> <b>Visibilidad:</b> contenido destacado que tendrá preferencias ante las publicaciones base</li>
+      </ul>
+      <div style="font-size:1.25rem;font-weight:700;color:#a78bfa;margin:18px 0 10px 0;text-shadow:0 2px 8px #0002;">
+        $39.99 MXN <span style="font-size:1rem;font-weight:400;">/ mes</span>
+      </div>
+      <button class="btn-suscribirse" style="background:linear-gradient(90deg,#a78bfa 60%,#6d28d9 100%);box-shadow:0 2px 12px #a78bfa44;">
+        Seleccionar Pro
+      </button>
+    </div>
+  </div>
+  <!-- Elimina este bloque si lo agregaste en home.html -->
+ 
+  </button>
+</body>
+</html>

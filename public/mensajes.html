@@ -1,0 +1,1606 @@
+<!-- Página de mensajes estilo chat profesional minimalista -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Hotjar Tracking Code for mi sitio web -->
+  <script>
+    (function (h, o, t, j, a, r) {
+      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+      h._hjSettings = { hjid: 6486284, hjsv: 6 };
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script'); r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+  </script>
+  <meta charset="UTF-8" />
+  <title>Mensajes - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <script>
+    // Forzar tema oscuro si el usuario ya lo guardó o por defecto en esta página
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <style>
+    body {
+      background: #181828;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+      background: #181828;
+    }
+
+    .chat-layout {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      width: 100vw;
+      background: #181828;
+      flex: 1;
+    }
+
+    .chat-sidebar {
+      width: 260px;
+      min-width: 180px;
+      max-width: 320px;
+      background: #23233a;
+      border-right: 2px solid #23233a;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .sidebar-header {
+      padding: 16px 16px 10px 16px;
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: #23233a;
+      border-bottom: 2px solid #23233a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-search {
+      padding: 10px 16px 8px 16px;
+      background: #23233a;
+      border-bottom: 2px solid #23233a;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 16px;
+      border: none;
+      background: #181828;
+      color: #ede9fe;
+      /* Color claro para el texto */
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .chat-list {
+      flex: 1;
+      overflow-y: auto;
+      background: #23233a;
+      padding-bottom: 8px;
+    }
+
+    .chat-list-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid #23233a;
+      cursor: pointer;
+      background: none;
+      transition: background 0.2s;
+      min-height: 60px;
+    }
+
+    .chat-list-item:hover,
+    .chat-list-item.active {
+      background: #2d0267;
+    }
+
+    .chat-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #6d28d9;
+    }
+
+    .chat-list-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-list-info h4 {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 2px 0;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-list-info p {
+      color: #bda6e6;
+      font-size: 0.93rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-main {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      max-height: 90vh;
+      background: #181828;
+      position: relative;
+      min-width: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 0 4px 32px #2d0267;
+      border-radius: 18px;
+      padding: 0;
+    }
+
+    .chat-header {
+      background: #23233a;
+      color: #fff;
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 2px solid #2d0267;
+      min-height: 80px;
+      font-size: 1.25rem;
+      border-radius: 18px 18px 0 0;
+    }
+
+    @media (max-width: 600px) {
+      .chat-header {
+        padding: 14px 12px;
+        min-height: 64px;
+        gap: 12px;
+      }
+
+      .chat-header-info h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    .chat-header-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2.5px solid #6d28d9;
+    }
+
+    .chat-header-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-header-info h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+    }
+
+    .chat-header-info p {
+      color: #bda6e6;
+      font-size: 1.08rem;
+      margin: 0;
+    }
+
+    .chat-messages {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: 10px 8px 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #181828;
+      font-size: 1rem;
+      max-height: 60vh;
+    }
+
+    .separator {
+      display: inline-block;
+      align-self: center;
+      background: #23233a;
+      color: #bda6e6;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      margin: 8px 0;
+      opacity: 0.85;
+    }
+
+    .ticks {
+      font-size: 0.85rem;
+      margin-left: 6px;
+      opacity: 0.8;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 18px 28px;
+      border-radius: 22px;
+      font-size: 1.13rem;
+      font-weight: 500;
+      background: #23233a;
+      color: #fff;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px #2d0267;
+      position: relative;
+      word-break: break-word;
+      margin-bottom: 2px;
+    }
+
+    .message.sent,
+    .message.enviado {
+      background: #6d28d9;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 10px;
+    }
+
+    .message.received,
+    .message.recibido {
+      background: #23233a;
+      color: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 10px;
+    }
+
+    .message img {
+      max-width: 180px;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+
+    .message-time {
+      font-size: 0.85rem;
+      color: #bda6e6;
+      margin-top: 4px;
+      text-align: right;
+      opacity: 0.7;
+    }
+
+    .chat-input-bar {
+      background: #23233a;
+      padding: 8px 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 2px solid #2d0267;
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 0 0 18px 18px;
+    }
+
+    @media (max-width: 600px) {
+      .chat-input-bar {
+        position: fixed;
+        bottom: 70px;
+        /* justo encima de la bottom-nav */
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        z-index: 100;
+      }
+
+      .chat-messages {
+        padding-bottom: 110px;
+        /* espacio para input bar fija */
+      }
+    }
+
+    .chat-input-bar input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: none;
+      background: #181828;
+      color: #fff;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .chat-input-bar button {
+      background: #6d28d9;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .chat-input-bar button:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout {
+        flex-direction: column;
+      }
+
+      .chat-layout {
+        flex-direction: column;
+      }
+
+      .chat-sidebar {
+        min-width: 0;
+        width: 100vw;
+        max-width: 100vw;
+        position: relative;
+        z-index: 2;
+      }
+
+      .chat-main {
+        min-width: 0;
+        width: 100vw;
+        max-width: 100vw;
+      }
+    }
+
+    /* Navegación inferior estilo Android */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .bottom-nav button:active,
+    .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .btn-nuevo-chat {
+      margin-top: 8px;
+      background: #6d28d9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      display: block;
+    }
+
+    .btn-nuevo-chat:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+
+    .badge-nuevo {
+      background: #ff6b6b;
+      color: #fff;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 0.85em;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .chat-hora {
+      color: #bda6e6;
+      font-size: 0.93rem;
+      margin-left: 8px;
+      align-self: flex-start;
+    }
+
+    .chat-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 8px;
+    }
+
+    .chat-actions button {
+      background: none;
+      border: none;
+      color: #bda6e6;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 2px;
+    }
+
+    .chat-actions button:hover {
+      color: #ff6b6b;
+    }
+
+    .escribiendo {
+      color: #a78bfa;
+      font-size: 0.98rem;
+      margin: 8px 0 0 0;
+      animation: fadeInTab 1s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    .mensaje-emoji {
+      font-size: 1.5rem;
+      vertical-align: middle;
+    }
+
+    .mensaje-imagen {
+      max-width: 200px;
+      border-radius: 12px;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .mensaje-archivo {
+      color: #6d28d9;
+      font-weight: 600;
+      text-decoration: underline;
+      margin: 6px 0;
+      display: block;
+    }
+
+    .notificacion-nuevo {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 300;
+      box-shadow: 0 2px 12px #2d0267;
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      .chat-main {
+        max-width: 98vw;
+        padding: 0;
+      }
+
+      .chat-header,
+      .chat-input-bar {
+        padding: 18px 10px;
+      }
+
+      .chat-messages {
+        padding: 24px 8vw 24px 8vw;
+      }
+    }
+
+    /* Mejorar tamaño y responsividad de los mensajes en móvil */
+    @media (max-width: 600px) {
+      .chat-main {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: calc(100vh - 70px) !important;
+        /* Ajusta según la altura de la barra inferior */
+        z-index: 10;
+      }
+
+      .chat-layout {
+        flex-direction: column !important;
+      }
+
+      .chat-sidebar {
+        position: relative !important;
+        z-index: 5;
+      }
+    }
+
+    /* Navegación inferior estilo Android */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .bottom-nav button:active,
+    .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .btn-nuevo-chat {
+      margin-top: 8px;
+      background: #6d28d9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      display: block;
+    }
+
+    .btn-nuevo-chat:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+
+    .badge-nuevo {
+      background: #ff6b6b;
+      color: #fff;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 0.85em;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .chat-hora {
+      color: #bda6e6;
+      font-size: 0.93rem;
+      margin-left: 8px;
+      align-self: flex-start;
+    }
+
+    .chat-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 8px;
+    }
+
+    .chat-actions button {
+      background: none;
+      border: none;
+      color: #bda6e6;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 2px;
+    }
+
+    .chat-actions button:hover {
+      color: #ff6b6b;
+    }
+
+    .escribiendo {
+      color: #a78bfa;
+      font-size: 0.98rem;
+      margin: 8px 0 0 0;
+      animation: fadeInTab 1s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    .mensaje-emoji {
+      font-size: 1.5rem;
+      vertical-align: middle;
+    }
+
+    .mensaje-imagen {
+      max-width: 200px;
+      border-radius: 12px;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .mensaje-archivo {
+      color: #6d28d9;
+      font-weight: 600;
+      text-decoration: underline;
+      margin: 6px 0;
+      display: block;
+    }
+
+    .notificacion-nuevo {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 300;
+      box-shadow: 0 2px 12px #2d0267;
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      .chat-main {
+        max-width: 98vw;
+        padding: 0;
+      }
+
+      .chat-header,
+      .chat-input-bar {
+        padding: 18px 10px;
+      }
+
+      .chat-messages {
+        padding: 24px 8vw 24px 8vw;
+      }
+    }
+
+    /* Mejorar tamaño y responsividad de los mensajes en móvil */
+    @media (max-width: 600px) {
+      .chat-main {
+        max-width: 100vw !important;
+        width: 100vw !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: calc(100vh - 70px) !important;
+        /* Ajusta según la altura de la barra inferior */
+        z-index: 10;
+      }
+
+      .chat-layout {
+        flex-direction: column !important;
+      }
+
+      .chat-sidebar {
+        position: relative !important;
+        z-index: 5;
+      }
+    }
+
+    /* Navegación inferior estilo Android */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .bottom-nav button:active,
+    .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .btn-nuevo-chat {
+      margin-top: 8px;
+      background: #6d28d9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+      display: block;
+    }
+
+    .btn-nuevo-chat:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+
+    .badge-nuevo {
+      background: #ff6b6b;
+      color: #fff;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 0.85em;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .chat-hora {
+      color: #bda6e6;
+      font-size: 0.93rem;
+      margin-left: 8px;
+      align-self: flex-start;
+    }
+
+    .chat-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 8px;
+    }
+
+    .chat-actions button {
+      background: none;
+      border: none;
+      color: #bda6e6;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 2px;
+    }
+
+    .chat-actions button:hover {
+      color: #ff6b6b;
+    }
+
+    .escribiendo {
+      color: #a78bfa;
+      font-size: 0.98rem;
+      margin: 8px 0 0 0;
+      animation: fadeInTab 1s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    }
+
+    .mensaje-emoji {
+      font-size: 1.5rem;
+      vertical-align: middle;
+    }
+
+    .mensaje-imagen {
+      max-width: 200px;
+      border-radius: 12px;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .mensaje-archivo {
+      color: #6d28d9;
+      font-weight: 600;
+      text-decoration: underline;
+      margin: 6px 0;
+      display: block;
+    }
+
+    .notificacion-nuevo {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 300;
+      box-shadow: 0 2px 12px #2d0267;
+      display: none;
+    }
+
+    @media (max-width: 1000px) {
+      .chat-main {
+        max-width: 98vw;
+        padding: 0;
+      }
+
+      .chat-header,
+      .chat-input-bar {
+        padding: 18px 10px;
+      }
+
+      .chat-messages {
+        padding: 24px 8vw 24px 8vw;
+      }
+    }
+
+    /* Sugerencias del modal de nuevo chat */
+    #nuevo-chat-sugerencias div {
+      color: #ede9fe !important;
+      background: #000000 !important;
+    }
+
+    #nuevo-chat-sugerencias {
+      color: #ede9fe !important;
+    }
+
+    /* Estilos para la IA (base y pro) */
+    #btn-ia-pro {
+      background: #a78bfa;
+      color: #101010;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
+    }
+
+    @media (max-width: 600px) {
+      #btn-ia-pro {
+        position: fixed !important;
+        top: auto !important;
+        right: 16px !important;
+        left: auto !important;
+        bottom: 90px !important;
+        /* por encima de la bottom-nav */
+        padding: 10px 12px !important;
+        font-size: 0.9rem !important;
+        border-radius: 12px !important;
+        z-index: 1000 !important;
+      }
+    }
+
+    #modal-ia {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000a;
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #modal-ia div {
+      background: #23233a;
+      padding: 28px 22px;
+      border-radius: 16px;
+      max-width: 90vw;
+      width: 350px;
+      box-shadow: 0 4px 24px #0008;
+    }
+
+    #modal-ia h3 {
+      color: #a78bfa;
+      margin-bottom: 12px;
+    }
+
+    #modal-ia textarea {
+      width: 100%;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 1rem;
+    }
+
+    #modal-ia #ia-respuesta {
+      color: #fff;
+      margin: 10px 0 0 0;
+      min-height: 32px;
+    }
+
+    #modal-ia button {
+      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    #modal-ia button:hover {
+      background: #2d0267;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mostrar publicaciones con comentarios y me gusta -->
+  <div id="publicaciones-feed" style="max-width:480px;margin:32px auto 90px auto;"></div>
+  <!-- Ventana de chat -->
+  <div class="chat-layout">
+    <aside class="chat-sidebar" id="chat-sidebar">
+      <div class="sidebar-header">Chats</div>
+      <div class="sidebar-search">
+        <input id="busqueda-chat" type="text" placeholder="Buscar usuario..." oninput="buscarUsuariosMensajes()">
+        <div id="sugerencias-usuarios"></div>
+      </div>
+      <div class="chat-list" id="chat-list"></div>
+      <button class="btn-nuevo-chat">Nuevo chat</button>
+    </aside>
+    <section class="chat-main" id="chat-main" style="display:none;">
+      <div class="chat-header">
+        <button id="btn-volver" onclick="volverALista()"
+          style="background:none; border:none; color:#fff; font-size:1.5rem; margin-right:10px; cursor:pointer;"><i
+            class="fa fa-arrow-left"></i></button>
+        <img loading="lazy" src="images/user1.jpg" alt="Usuario" class="chat-header-avatar" />
+        <div class="chat-header-info">
+          <h3>Usuario</h3>
+          <p>En línea</p>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-bar">
+        <input type="text" placeholder="Escribe un mensaje" />
+        <button><i class="fa fa-paper-plane"></i></button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Navegación inferior estilo Android -->
+  <nav class="bottom-nav">
+    <button onclick="location.href='home.html'">
+      <i class="fa fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    <button onclick="location.href='mensajes.html'" class="selected">
+      <i class="fa fa-envelope"></i>
+      <span>Mensajes</span>
+    </button>
+    <button onclick="location.href='nueva-publicacion.html'">
+      <i class="fa fa-plus-square"></i>
+      <span>Publicación</span>
+    </button>
+    <button onclick="location.href='perfil.html'">
+      <i class="fa fa-user"></i>
+      <span>Perfil</span>
+    </button>
+  </nav>
+
+  <div class="notificacion-nuevo" id="notificacion-nuevo">¡Nuevo mensaje recibido!</div>
+
+  <!-- Botón para preguntar a la IA -->
+  <button id="btn-ia-pro" style="box-shadow:0 2px 12px #a78bfa44; position: fixed; top: 16px; right: 16px; z-index: 9999;">
+    Preguntar a la IA 🤖
+  </button>
+  <!-- Modal para la pregunta -->
+  <div id="modal-ia"
+    style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000a;z-index:1000;align-items:center;justify-content:center;">
+    <div
+      style="background:#23233a;padding:38px 28px 32px 28px;border-radius:22px;max-width:98vw;width:420px;box-shadow:0 8px 32px #000a;">
+      <h3 style="color:#a78bfa;margin-bottom:18px;font-size:1.35rem;text-align:center;">Pregunta a la IA</h3>
+      <textarea id="input-ia" rows="4"
+        style="width:100%;border-radius:10px;padding:12px 14px;font-size:1.08rem;resize:none;margin-bottom:12px;"></textarea>
+      <div id="ia-respuesta"
+        style="color:#fff;background:#181828;border-radius:8px;padding:10px 12px;min-height:38px;margin-bottom:10px;font-size:1.05rem;">
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:14px;">
+        <button onclick="cerrarModalIA()"
+          style="background:#23233a;color:#fff;border:1px solid #a78bfa;border-radius:8px;padding:8px 18px;cursor:pointer;font-size:1rem;">Cerrar</button>
+        <button onclick="enviarPreguntaIA()"
+          style="background:#a78bfa;color:#fff;border:none;border-radius:8px;padding:8px 18px;cursor:pointer;font-size:1rem;">Preguntar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.appspot.com",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    firebase.firestore().collection("prueba_conexion").get()
+      .then((querySnapshot) => {
+        console.log("¡Firestore conectado! Documentos encontrados:", querySnapshot.size);
+      })
+      .catch((error) => {
+        console.error("Error al conectar con Firestore:", error);
+      });
+  </script>
+  <script>
+    function iniciarNuevoChat() {
+      alert('Funcionalidad para iniciar un nuevo chat próximamente.');
+    }
+    function eliminarChat(e) {
+      e.stopPropagation();
+      alert('Eliminar chat (demo)');
+    }
+    function archivarChat(e) {
+      e.stopPropagation();
+      alert('Archivar chat (demo)');
+    }
+    function abrirChat() {
+      const chatSidebar = document.getElementById('chat-sidebar');
+      const chatMain = document.getElementById('chat-main');
+      if (chatSidebar && chatMain) {
+        chatSidebar.style.display = 'none';
+        chatMain.style.display = 'flex';
+      }
+      ocultarBotonIA();
+      // Oculta el botón al abrir un chat
+      document.getElementById('btn-ia-pro').style.display = 'none';
+    }
+    function volverALista() {
+      const chatSidebar = document.getElementById('chat-sidebar');
+      const chatMain = document.getElementById('chat-main');
+      if (chatSidebar && chatMain) {
+        chatSidebar.style.display = '';
+        chatMain.style.display = 'none';
+      }
+      // Muestra el botón de IA al volver a la lista
+      const btnIA = document.getElementById('btn-ia-pro');
+      if (btnIA) btnIA.style.display = 'flex';
+    }
+    // Simulación de animación "escribiendo..."
+    function mostrarEscribiendo() {
+      const chatList = document.getElementById('chat-list');
+      if (!chatList) return;
+      let escribiendo = document.createElement('div');
+      escribiendo.className = 'escribiendo';
+      escribiendo.textContent = 'María está escribiendo...';
+      chatList.appendChild(escribiendo);
+      setTimeout(() => { escribiendo.remove(); }, 2500);
+    }
+    // Simulación de notificación de nuevo mensaje
+    function mostrarNotificacionNuevo() {
+      const notif = document.getElementById('notificacion-nuevo');
+      if (!notif) return;
+      notif.style.display = 'block';
+      setTimeout(() => { notif.style.display = 'none'; }, 2000);
+    }
+    const miCorreo = localStorage.getItem('usuarioActual');
+    let destinatarioCorreo = null;
+    let destinatarioNombre = '';
+    let unsubscribeListener = null;
+
+    // Buscar usuarios registrados en Firestore
+    async function buscarUsuariosMensajes() {
+      const input = document.getElementById('busqueda-chat');
+      const sugerencias = document.getElementById('sugerencias-usuarios');
+      if (!input || !sugerencias) return;
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        sugerencias.style.display = 'none';
+        sugerencias.innerHTML = '';
+        return;
+      }
+      // Buscar usuarios en Firestore
+      const usuariosRef = firebase.firestore().collection('usuarios');
+      const snapshot = await usuariosRef.get();
+      const usuarios = [];
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (
+          (data.nombre && data.nombre.toLowerCase().includes(query)) ||
+          (data.correo && data.correo.toLowerCase().includes(query))
+        ) {
+          usuarios.push(data);
+        }
+      });
+      if (usuarios.length === 0) {
+        sugerencias.style.display = 'none';
+        sugerencias.innerHTML = '';
+        return;
+      }
+      sugerencias.innerHTML = usuarios.map(u => `<div style='padding:10px;cursor:pointer;' onclick='crearChatConUsuarioReal("${u.correo}", "${u.nombre}")'>${u.nombre} (${u.correo})</div>`).join('');
+      sugerencias.style.display = 'block';
+    }
+
+    // Enviar mensaje
+    function enviarMensaje() {
+      const input = document.querySelector('.chat-input-bar input');
+      if (!input || !input.value.trim() || !miCorreo || !destinatarioCorreo) return;
+      const texto = input.value.trim();
+      // Mostrar el mensaje inmediatamente en el chat
+      mostrarMensajesEnChat([
+        ...window.__mensajesChatActual || [],
+        {
+          remitente: miCorreo,
+          destinatario: destinatarioCorreo,
+          texto,
+          timestamp: { seconds: Math.floor(Date.now() / 1000) }
+        }
+      ]);
+      window.__mensajesChatActual = [
+        ...window.__mensajesChatActual || [],
+        {
+          remitente: miCorreo,
+          destinatario: destinatarioCorreo,
+          texto,
+          timestamp: { seconds: Math.floor(Date.now() / 1000) }
+        }
+      ];
+      // Guardar ambos correos únicos en participantes
+      const participantes = Array.from(new Set([miCorreo, destinatarioCorreo]));
+      firebase.firestore().collection('mensajes').add({
+        remitente: miCorreo,
+        destinatario: destinatarioCorreo,
+        texto,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        participantes
+      });
+      input.value = '';
+    }
+
+    // Asegurar que el input y el botón de enviar funcionen correctamente
+    function actualizarEventosChatInput() {
+      const chatInputBtn = document.querySelector('.chat-input-bar button');
+      const chatInput = document.querySelector('.chat-input-bar input');
+      if (chatInputBtn) {
+        chatInputBtn.onclick = enviarMensaje;
+      }
+      if (chatInput) {
+        chatInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') enviarMensaje();
+        });
+        chatInput.disabled = !destinatarioCorreo;
+        chatInput.placeholder = destinatarioCorreo ? 'Escribe un mensaje' : 'Selecciona un usuario para chatear';
+      }
+    }
+    // Llama a esta función cada vez que se abre un chat
+    window.crearChatConUsuarioReal = function (correo, nombre) {
+      destinatarioCorreo = correo;
+      destinatarioNombre = nombre;
+      const sugerencias = document.getElementById('sugerencias-usuarios');
+      const busquedaChat = document.getElementById('busqueda-chat');
+      const chatSidebar = document.getElementById('chat-sidebar');
+      const chatMain = document.getElementById('chat-main');
+      const chatHeaderInfo = document.querySelector('.chat-header-info h3');
+      const chatMessages = document.getElementById('chat-messages');
+      if (sugerencias) sugerencias.style.display = 'none';
+      if (busquedaChat) busquedaChat.value = '';
+      if (chatSidebar && chatMain) {
+        chatSidebar.style.display = 'none';
+        chatMain.style.display = 'flex';
+      }
+      if (chatHeaderInfo) chatHeaderInfo.textContent = nombre;
+      if (chatMessages) chatMessages.innerHTML = '';
+      // Oculta el botón de IA al abrir el chat
+      const btnIA = document.getElementById('btn-ia-pro');
+      if (btnIA) btnIA.style.display = 'none';
+      // Iniciar listener de mensajes
+      iniciarListenerMensajes();
+      // Habilitar input y botón de enviar
+      actualizarEventosChatInput();
+    }
+    // Al cargar la página, deshabilita el input si no hay destinatario
+    actualizarEventosChatInput();
+
+    // Listener en tiempo real para mensajes entre ambos usuarios
+    function iniciarListenerMensajes() {
+      if (!miCorreo || !destinatarioCorreo) return;
+      if (unsubscribeListener) unsubscribeListener();
+      const mensajesRef = firebase.firestore().collection('mensajes')
+        .where('participantes', 'array-contains', miCorreo)
+        .orderBy('timestamp');
+      unsubscribeListener = mensajesRef.onSnapshot(snapshot => {
+        const mensajes = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (
+            (data.remitente === miCorreo && data.destinatario === destinatarioCorreo) ||
+            (data.remitente === destinatarioCorreo && data.destinatario === miCorreo)
+          ) {
+            mensajes.push(data);
+          }
+        });
+        // Mostrar todos los mensajes previos acumulados
+        mostrarMensajesEnChat(mensajes);
+        // Guardar mensajes actuales para mostrar el mensaje instantáneo al enviar
+        window.__mensajesChatActual = mensajes;
+      });
+    }
+
+    // Mostrar mensajes en el chat
+    function mostrarMensajesEnChat(mensajes) {
+      window.__mensajesChatActual = mensajes;
+      const chatMessages = document.getElementById('chat-messages');
+      if (!chatMessages) return;
+      chatMessages.innerHTML = '';
+      let lastDate = '';
+      mensajes.forEach(msg => {
+        const dateStr = msg.timestamp ? new Date(msg.timestamp.seconds * 1000).toDateString() : '';
+        if (dateStr && dateStr !== lastDate) {
+          const sep = document.createElement('div');
+          sep.className = 'separator';
+          sep.textContent = dateStr === new Date().toDateString() ? 'Hoy' : dateStr;
+          chatMessages.appendChild(sep);
+          lastDate = dateStr;
+        }
+        const div = document.createElement('div');
+        const sent = msg.remitente === miCorreo;
+        div.className = 'message ' + (sent ? 'enviado' : 'recibido');
+        const ticks = sent ? "<span class='ticks'>✔✔</span>" : '';
+        div.innerHTML = `${msg.texto}<div class='message-time'>${msg.timestamp ? new Date(msg.timestamp.seconds * 1000).toLocaleTimeString() : ''} ${ticks}</div>`;
+        chatMessages.appendChild(div);
+      });
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    document.addEventListener('click', function (e) {
+      const sugerencias = document.getElementById('sugerencias-usuarios');
+      if (sugerencias && !e.target.closest('#sugerencias-usuarios') && e.target.id !== 'busqueda-chat') {
+        sugerencias.style.display = 'none';
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarChatsRecientes();
+    });
+  </script>
+  <script>
+    // Agrega el HTML para la barra de búsqueda flotante de nuevo chat
+    const nuevoChatHTML = `
+      <div id="nuevo-chat-modal" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(24,24,40,0.85);z-index:999;display:flex;align-items:center;justify-content:center;">
+        <div style="background:#23233a;padding:32px 24px 24px 24px;border-radius:18px;box-shadow:0 2px 24px #2d0267;min-width:320px;max-width:90vw;">
+          <h3 style='color:#fff;margin-bottom:12px;'>Buscar usuario para nuevo chat</h3>
+          <input id="nuevo-chat-busqueda" type="text" placeholder="Escribe el nombre..." style="width:100%;padding:12px 16px;border-radius:12px;border:none;background:#181828;color:#fff;font-size:1.1rem;outline:none;">
+          <div id="nuevo-chat-sugerencias" style="margin-top:10px;"></div>
+          <button onclick="cerrarNuevoChatModal()" style="margin-top:18px;background:#6d28d9;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-weight:700;cursor:pointer;width:100%;">Cancelar</button>
+        </div>
+      </div>
+    `;
+    window.iniciarNuevoChat = function () {
+      if (document.getElementById('nuevo-chat-modal')) return;
+      document.body.insertAdjacentHTML('beforeend', nuevoChatHTML);
+      document.getElementById('nuevo-chat-busqueda').focus();
+      document.getElementById('nuevo-chat-busqueda').addEventListener('input', buscarUsuariosParaNuevoChat);
+    };
+    window.cerrarNuevoChatModal = function () {
+      const modal = document.getElementById('nuevo-chat-modal');
+      if (modal) modal.remove();
+    };
+    async function buscarUsuariosParaNuevoChat() {
+      const input = document.getElementById('nuevo-chat-busqueda');
+      const sugerencias = document.getElementById('nuevo-chat-sugerencias');
+      if (!input || !sugerencias) return;
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        sugerencias.innerHTML = '';
+        return;
+      }
+      const usuariosRef = firebase.firestore().collection('usuarios');
+      const snapshot = await usuariosRef.get();
+      const usuarios = [];
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (
+          (data.nombre && data.nombre.toLowerCase().includes(query)) ||
+          (data.nombreCompleto && data.nombreCompleto.toLowerCase().includes(query))
+        ) {
+          usuarios.push(data);
+        }
+      });
+      if (usuarios.length === 0) {
+        sugerencias.innerHTML = '<div style="color:#bda6e6;padding:8px;">No se encontró ningún usuario.</div>';
+        return;
+      }
+      sugerencias.innerHTML = usuarios.map(u => `<div style='padding:10px;cursor:pointer;border-radius:8px;background:#181828;margin-bottom:6px;' onclick='seleccionarUsuarioNuevoChat("${u.correo}", "${u.nombreCompleto || u.nombre}")'>${u.nombreCompleto || u.correo} (${u.correo})</div>`).join('');
+    }
+    window.seleccionarUsuarioNuevoChat = async function (correo, nombre) {
+      cerrarNuevoChatModal();
+      // Abre el chat y envía mensaje automático si no existe
+      window.crearChatConUsuarioReal(correo, nombre);
+      // Verificar si ya existe algún mensaje entre los dos usuarios
+      const miCorreo = localStorage.getItem('usuarioActual');
+      const mensajesRef = firebase.firestore().collection('mensajes')
+        .where('participantes', 'array-contains', miCorreo)
+        .orderBy('timestamp');
+      const snapshot = await mensajesRef.get();
+      let existe = false;
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        if (
+          (data.remitente === miCorreo && data.destinatario === correo) ||
+          (data.remitente === correo && data.destinatario === miCorreo)
+        ) {
+          existe = true;
+        }
+      });
+      if (!existe) {
+        // Enviar mensaje automático de bienvenida
+        firebase.firestore().collection('mensajes').add({
+          remitente: miCorreo,
+          destinatario: correo,
+          texto: '¡Hola! Puedes escribirme por aquí.',
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          participantes: Array.from(new Set([miCorreo, correo]))
+        });
+      }
+    };
+    // Reemplaza el onclick del botón de nuevo chat
+    const btnNuevoChat = document.querySelector('.btn-nuevo-chat');
+    if (btnNuevoChat) btnNuevoChat.onclick = window.iniciarNuevoChat;
+  </script>
+  <script>
+    async function cargarChatsRecientes() {
+      const miCorreo = localStorage.getItem('usuarioActual');
+      const chatList = document.getElementById('chat-list');
+      if (!chatList || !miCorreo) return;
+      chatList.innerHTML = '<div style="color:#bda6e6;text-align:center;padding:18px;">Cargando chats...</div>';
+      const mensajesRef = firebase.firestore().collection('mensajes').where('participantes', 'array-contains', miCorreo);
+      const snapshot = await mensajesRef.get();
+      const chats = {};
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const otroCorreo = data.remitente === miCorreo ? data.destinatario : data.remitente;
+        if (!chats[otroCorreo] || (data.timestamp && (!chats[otroCorreo].timestamp || data.timestamp.seconds > chats[otroCorreo].timestamp.seconds))) {
+          chats[otroCorreo] = {
+            nombre: '',
+            correo: otroCorreo,
+            texto: data.texto,
+            timestamp: data.timestamp
+          };
+        }
+      });
+      // Obtener nombres de usuarios
+      const usuariosRef = firebase.firestore().collection('usuarios');
+      const usuariosSnap = await usuariosRef.get();
+      const usuarios = {};
+      usuariosSnap.forEach(doc => {
+        const data = doc.data();
+        usuarios[data.correo] = data.nombre || data.nombreCompleto || data.correo;
+      });
+      // Renderizar chats
+      let html = '';
+      const chatsArr = Object.values(chats).sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+      if (chatsArr.length === 0) {
+        html = '<div style="color:#bda6e6;text-align:center;padding:18px;">No tienes chats aún.<br>¡Inicia una conversación!</div>';
+      } else {
+        chatsArr.forEach(chat => {
+          const nombre = usuarios[chat.correo] || chat.correo;
+          html += `<div class='chat-list-item' onclick='window.crearChatConUsuarioReal("${chat.correo}", "${nombre}")'>
+        <img loading='lazy' src='images/usuario.jpeg' class='chat-avatar' alt='avatar' onerror="this.onerror=null;this.src='images/user1.jpg';">
+        <div class='chat-list-info'>
+          <h4>${nombre}</h4>
+          <p>${chat.texto ? chat.texto.substring(0, 30) : ''}</p>
+        </div>
+        <span class='chat-hora'>${chat.timestamp ? new Date(chat.timestamp.seconds * 1000).toLocaleTimeString() : ''}</span>
+      </div>`;
+        });
+      }
+      chatList.innerHTML = html;
+    }
+  </script>
+  <script>
+    // Mostrar botón para todos los usuarios (base y pro)
+    document.getElementById('btn-ia-pro').style.display = 'flex';
+
+    // Abrir modal
+    document.getElementById('btn-ia-pro').onclick = function () {
+      document.getElementById('modal-ia').style.display = 'flex';
+      document.getElementById('input-ia').value = '';
+      document.getElementById('ia-respuesta').textContent = '';
+    };
+
+    // Cerrar modal
+    function cerrarModalIA() {
+      document.getElementById('modal-ia').style.display = 'none';
+    }
+
+    // Enviar pregunta a la IA (petición real al backend)
+    async function enviarPreguntaIA() {
+      const pregunta = document.getElementById('input-ia').value.trim();
+      const respuestaDiv = document.getElementById('ia-respuesta');
+      if (!pregunta) {
+        respuestaDiv.textContent = 'Escribe una pregunta.';
+        return;
+      }
+      respuestaDiv.textContent = 'Pensando...';
+      try {
+        const res = await fetch(`/api/ia`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ pregunta })
+        });
+        const data = await res.json();
+        respuestaDiv.textContent = data.respuesta || 'No se pudo obtener respuesta de la IA.';
+      } catch (e) {
+        respuestaDiv.textContent = 'Ocurrió un error al consultar la IA.';
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Hotjar Tracking Code for mi sitio web -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6486284,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <title>Buscar - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    /* Navegación inferior estilo Android */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+    .bottom-nav button:active, .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+    .buscar-filtros {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 24px auto 18px auto;
+      max-width: 900px;
+    }
+    .buscar-filtros select, .buscar-filtros input {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1.5px solid #3b2a6d;
+      background: #181028;
+      color: #ede9fe;
+      font-size: 1.05rem;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    .buscar-filtros button {
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.01rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .buscar-filtros button:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    .buscar-historial {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 12px;
+      padding: 10px 18px;
+      margin: 0 auto 18px auto;
+      max-width: 700px;
+      font-size: 1.01rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .buscar-historial-tag {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 10px;
+      padding: 4px 12px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-right: 4px;
+      margin-bottom: 4px;
+      border: none;
+      transition: background 0.2s;
+    }
+    .buscar-historial-tag:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+    .buscar-sugerencias {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 0 auto 18px auto;
+      max-width: 700px;
+    }
+    .buscar-sugerencia {
+      background: #a78bfa;
+      color: #23233a;
+      border-radius: 10px;
+      padding: 4px 12px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+    }
+    .buscar-sugerencia:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    .buscar-resultados-destacados {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 0 auto 18px auto;
+      max-width: 700px;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 12px #2d0267;
+    }
+    .buscar-loader {
+      border: 4px solid #ede9fe;
+      border-top: 4px solid #6d28d9;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+      margin: 32px auto 10px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .buscar-no-resultados {
+      color: #ff6b6b;
+      background: #ff6b6b22;
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      font-size: 1.1rem;
+      margin: 24px auto;
+      max-width: 600px;
+    }
+    .btn-volver-inicio {
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin: 18px auto 0 auto;
+      display: block;
+    }
+    .btn-volver-inicio:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="time" id="hora-actual">00:00</span>
+    <div class="search-container">
+      <input class="search-bar" id="searchInput" placeholder="Buscar publicaciones, trabajadores..." />
+      <button class="search-btn" onclick="realizarBusqueda()">🔍</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Filtros de búsqueda -->
+    <div class="filters-section">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="todo" onclick="cambiarFiltro('todo')">
+          🔍 Todo
+        </button>
+        <button class="filter-tab" data-filter="publicaciones" onclick="cambiarFiltro('publicaciones')">
+          📝 Publicaciones
+        </button>
+        <button class="filter-tab" data-filter="trabajadores" onclick="cambiarFiltro('trabajadores')">
+          👷 Trabajadores
+        </button>
+        <button class="filter-tab" data-filter="categorias" onclick="cambiarFiltro('categorias')">
+          🏷️ Categorías
+        </button>
+      </div>
+
+      <div class="advanced-filters">
+        <select id="categoriaFilter" class="filter-select">
+          <option value="">Todas las categorías</option>
+          <option value="hogar">Hogar y Jardín</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="transporte">Transporte</option>
+          <option value="salud">Salud y Bienestar</option>
+          <option value="educacion">Educación</option>
+          <option value="otros">Otros</option>
+        </select>
+
+        <select id="ubicacionFilter" class="filter-select">
+          <option value="">Todas las ubicaciones</option>
+          <option value="tula">Tula de Allende</option>
+          <option value="pachuca">Pachuca</option>
+          <option value="mexico">Ciudad de México</option>
+          <option value="queretaro">Querétaro</option>
+          <option value="toluca">Toluca</option>
+        </select>
+
+        <button class="btn-limpiar" onclick="limpiarFiltros()">
+          🗑️ Limpiar filtros
+        </button>
+      </div>
+    </div>
+
+    <!-- Resultados de búsqueda -->
+    <div class="search-results">
+      <div class="results-header">
+        <h2 id="resultsTitle">Resultados de búsqueda</h2>
+        <span id="resultsCount" class="results-count">0 resultados encontrados</span>
+      </div>
+
+      <!-- Contenedor de resultados -->
+      <div id="resultsContainer" class="results-container">
+        <!-- Los resultados se cargarán dinámicamente aquí -->
+      </div>
+
+      <!-- Estado de carga -->
+      <div id="loadingState" class="loading-state" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Buscando...</p>
+      </div>
+
+      <!-- Estado sin resultados -->
+      <div id="noResultsState" class="no-results" style="display: none;">
+        <div class="no-results-icon">🔍</div>
+        <h3>No se encontraron resultados</h3>
+        <p>Intenta con otros términos de búsqueda o ajusta los filtros</p>
+        <button class="btn-sugerir" onclick="mostrarSugerencias()">
+          Ver sugerencias
+        </button>
+      </div>
+    </div>
+
+    <!-- Sugerencias populares -->
+    <div class="suggestions-section">
+      <h3>Búsquedas populares</h3>
+      <div class="suggestions-grid">
+        <button class="suggestion-tag" onclick="buscarPorTag('plomero')">🔧 Plomero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('electricista')">⚡ Electricista</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('jardinero')">🌱 Jardinero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('pintor')">🎨 Pintor</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('carpintero')">🔨 Carpintero</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('mecanico')">🚗 Mecánico</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('limpieza')">🧹 Limpieza</button>
+        <button class="suggestion-tag" onclick="buscarPorTag('reparacion')">🔧 Reparación</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Botón flotante para añadir publicación -->
+  <div class="floating-add-btn" onclick="mostrarModalPublicacion()">
+    <span>+</span>
+  </div>
+
+  <!-- Modal para añadir publicación -->
+  <div id="modalPublicacion" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <h2>Nueva Publicación</h2>
+      <p class="precio-info">💰 Costo: $20.00 MXN</p>
+      
+      <form id="formPublicacion">
+        <div class="form-group">
+          <label for="titulo">Título de la publicación</label>
+          <input type="text" id="titulo" placeholder="¿Qué necesitas?" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" placeholder="Describe tu solicitud..." rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="imagen">Imagen (opcional)</label>
+          <input type="file" id="imagen" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria" required>
+            <option value="">Selecciona una categoría</option>
+            <option value="hogar">Hogar y Jardín</option>
+            <option value="tecnologia">Tecnología</option>
+            <option value="transporte">Transporte</option>
+            <option value="salud">Salud y Bienestar</option>
+            <option value="educacion">Educación</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="ubicacion">Ubicación</label>
+          <input type="text" id="ubicacion" placeholder="Tu ciudad o zona" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contacto">Contacto</label>
+          <input type="text" id="contacto" placeholder="Teléfono o correo" required>
+        </div>
+        
+        <div class="pago-section">
+          <h3>Información de Pago</h3>
+          <p>Para publicar tu solicitud, se cobrará una tarifa de $20.00 MXN</p>
+          
+          <div class="metodos-pago">
+            <label>
+              <input type="radio" name="metodoPago" value="tarjeta" required>
+              💳 Tarjeta de Crédito/Débito
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="paypal" required>
+              🅿️ PayPal
+            </label>
+            <label>
+              <input type="radio" name="metodoPago" value="transferencia" required>
+              🏦 Transferencia Bancaria
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" onclick="cerrarModal()" class="btn-cancelar">Cancelar</button>
+          <button type="submit" class="btn-publicar">Publicar ($20.00)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Navegación inferior estilo Android -->
+  <nav class="bottom-nav">
+    <button onclick="location.href='home.html'">
+      <i class="fa fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    <button onclick="location.href='mensajes.html'">
+      <i class="fa fa-envelope"></i>
+      <span>Mensajes</span>
+    </button>
+    <button onclick="location.href='nueva-publicacion.html'">
+      <i class="fa fa-plus-square"></i>
+      <span>Publicación</span>
+    </button>
+    <button onclick="location.href='perfil.html'">
+      <i class="fa fa-user"></i>
+      <span>Perfil</span>
+    </button>
+  </nav>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.appspot.com",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    firebase.firestore().collection("prueba_conexion").get()
+      .then((querySnapshot) => {
+        console.log("¡Firestore conectado! Documentos encontrados:", querySnapshot.size);
+      })
+      .catch((error) => {
+        console.error("Error al conectar con Firestore:", error);
+      });
+  </script>
+  <script src="script.js"></script>
+  <script src="buscar.js"></script>
+  <script>
+    // Ejecutar búsqueda automática si hay parámetro 'query' en la URL
+    window.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('query');
+      if (query) {
+        const input = document.getElementById('searchInput');
+        if (input) input.value = query;
+        if (typeof realizarBusqueda === 'function') {
+          realizarBusqueda();
+        }
+      }
+    });
+  </script>
+</body>
+</html> 

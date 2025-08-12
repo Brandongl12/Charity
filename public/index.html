@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+ <!-- Hotjar Tracking Code for mi sitio web -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6486284,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charity - Conectando Comunidades</title>
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .loading {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #6d28d9;
+      border-top: 4px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .redirect-text {
+      color: #a78bfa;
+      font-size: 1rem;
+    }
+    .manual-link {
+      margin-top: 20px;
+    }
+    .manual-link a {
+      color: #6d28d9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .manual-link a:hover {
+      color: #a78bfa;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <div class="spinner"></div>
+    <p>Cargando Charity...</p>
+  </div>
+  
+  <div class="redirect-text">
+    Si no eres redirigido automáticamente, haz clic en el enlace de abajo.
+  </div>
+  
+  <div class="manual-link">
+    <a href="iniciar-sesion.html">Ir al Login de Charity</a>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.appspot.com",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    // Prueba de conexión: intenta leer una colección de prueba
+    firebase.firestore().collection("prueba_conexion").get()
+      .then((querySnapshot) => {
+        console.log("¡Firestore conectado! Documentos encontrados:", querySnapshot.size);
+      })
+      .catch((error) => {
+        console.error("Error al conectar con Firestore:", error);
+      });
+  </script>
+</body>
+</html> 

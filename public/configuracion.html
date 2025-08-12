@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Hotjar Tracking Code for mi sitio web -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6486284,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <title>Editar Perfil - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    body {
+      background: #181828;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .config-container {
+      background: #23233a;
+      border-radius: 18px;
+      box-shadow: 0 2px 18px #2d0267;
+      padding: 38px 32px 32px 32px;
+      width: 100%;
+      max-width: 420px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+    }
+    .config-section {
+      margin: 0 0 16px 0;
+      padding: 0;
+      width: 100%;
+      background: none;
+      border: none;
+    }
+    .config-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #bda6e6;
+      font-weight: 500;
+      font-size: 0.98rem;
+    }
+    .config-input, .config-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #3b2a6d;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      background: #181828;
+      color: #ede9fe;
+      margin-bottom: 2px;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .config-input:focus, .config-select:focus {
+      outline: none;
+      border-color: #6d28d9;
+      box-shadow: 0 0 0 2px #6d28d9;
+    }
+    .btn-config-save {
+      width: 100%;
+      max-width: 400px;
+      padding: 13px 0;
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin: 18px auto 0 auto;
+      display: block;
+    }
+    .btn-config-save:active, .btn-config-save:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    .btn-regresar {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 24px;
+      background: #22223b;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      padding: 14px 0;
+      display: block;
+    }
+    .btn-regresar:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    #mensaje-confirmacion {
+      color: #a7f3d0;
+      background: #064e3b;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 12px;
+      text-align: center;
+      font-size: 1rem;
+      display: none;
+    }
+    .config-section-title {
+      font-size: 1.15rem;
+      color: #6d28d9;
+      font-weight: 700;
+      margin: 18px 0 8px 0;
+      letter-spacing: 0.5px;
+    }
+    .config-privacidad {
+      margin-bottom: 12px;
+    }
+    .btn-eliminar-cuenta {
+      background: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      padding: 12px 0;
+      margin-top: 18px;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-eliminar-cuenta:hover {
+      background: #ff5252;
+    }
+    .config-soporte {
+      margin-top: 18px;
+      text-align: center;
+    }
+    .config-soporte a {
+      color: #6d28d9;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="config-container">
+    <form id="form-configuracion" autocomplete="off">
+      <div class="config-section">
+        <label for="nombre" class="config-label">Nombre</label>
+        <input type="text" id="nombre" class="config-input" placeholder="Tu nombre" />
+      </div>
+      <div class="config-section">
+        <label for="apellidoPaterno" class="config-label">Apellido paterno</label>
+        <input type="text" id="apellidoPaterno" class="config-input" placeholder="Apellido paterno" />
+      </div>
+      <div class="config-section">
+        <label for="apellidoMaterno" class="config-label">Apellido materno</label>
+        <input type="text" id="apellidoMaterno" class="config-input" placeholder="Apellido materno" />
+      </div>
+      <div class="config-section">
+        <label for="experiencia" class="config-label">Experiencia laboral (opcional)</label>
+        <input type="text" id="experiencia" class="config-input" placeholder="Lugar de trabajo o actividad (opcional)" />
+      </div>
+      <div class="config-section">
+        <label for="descripcion" class="config-label">Descripción</label>
+        <input type="text" id="descripcion" class="config-input" placeholder="Cuéntanos algo sobre tu experiencia laboral" />
+      </div>
+      <div class="config-section">
+        <label for="estudios" class="config-label">Estudios</label>
+        <input type="text" id="estudios" class="config-input" placeholder="Nivel de estudios" />
+      </div>
+      <div class="config-section">
+        <label for="ciudad" class="config-label">Ciudad</label>
+        <input type="text" id="ciudad" class="config-input" value="Tula de Allende Hidalgo" />
+      </div>
+      <div class="config-section">
+        <label for="telefono" class="config-label">Teléfono</label>
+        <input type="tel" id="telefono" class="config-input" value="77315978616" />
+      </div>
+      <div class="config-section">
+        <label for="correo" class="config-label">Correo electrónico</label>
+        <input type="email" id="correo" class="config-input" value="Danielceron546@gmail.com" />
+      </div>
+      <div class="config-section">
+        <label for="sexo" class="config-label">Sexo</label>
+        <select id="sexo" class="config-select">
+          <option value="masculino" selected>Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <div class="config-section">
+        <label for="nacimiento" class="config-label">Fecha de nacimiento</label>
+        <input type="date" id="nacimiento" class="config-input" value="2006-08-31" />
+      </div>
+      <div class="config-section-title">Cambio de contraseña</div>
+      <div class="config-section">
+        <label for="nueva-contrasena" class="config-label">Nueva contraseña</label>
+        <input type="password" id="nueva-contrasena" class="config-input" placeholder="Nueva contraseña" />
+      </div>
+      <div class="config-section">
+        <label for="confirmar-contrasena" class="config-label">Confirmar nueva contraseña</label>
+        <input type="password" id="confirmar-contrasena" class="config-input" placeholder="Repite la nueva contraseña" />
+      </div>
+      <div class="config-section-title">Notificaciones</div>
+      <div class="config-section">
+        <label><input type="checkbox" id="notif-email" checked /> Recibir notificaciones por email</label><br>
+        <label><input type="checkbox" id="notif-push" /> Notificaciones push en el navegador</label>
+      </div>
+      <div class="config-section-title">Privacidad</div>
+      <div class="config-section config-privacidad">
+        <label for="privacidad-perfil" class="config-label">¿Quién puede ver tu perfil?</label>
+        <select id="privacidad-perfil" class="config-select">
+          <option value="todos">Todos</option>
+          <option value="registrados">Solo usuarios registrados</option>
+          <option value="nadie">Nadie</option>
+        </select>
+      </div>
+      <div class="config-section config-privacidad">
+        <label for="privacidad-publicaciones" class="config-label">¿Quién puede ver tus publicaciones?</label>
+        <select id="privacidad-publicaciones" class="config-select">
+          <option value="todos">Todos</option>
+          <option value="registrados">Solo usuarios registrados</option>
+          <option value="nadie">Nadie</option>
+        </select>
+      </div>
+      <div class="config-section-title">Idioma y accesibilidad</div>
+      <div class="config-section">
+        <label for="idioma" class="config-label">Idioma</label>
+        <select id="idioma" class="config-select">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <div class="config-section">
+        <label><input type="checkbox" id="accesibilidad-alto-contraste" /> Alto contraste</label>
+      </div>
+      <button type="submit" class="btn-config-save">Guardar Cambios</button>
+      <button type="button" class="btn-eliminar-cuenta" onclick="eliminarCuenta()">Eliminar cuenta</button>
+      <div id="mensaje-confirmacion" class="config-message">
+        ✔ Tus datos se han actualizado correctamente.
+      </div>
+      <div class="config-soporte">
+        ¿Necesitas ayuda? <a href="mailto:soporte@charity.com">Contactar soporte</a>
+      </div>
+    </form>
+    <button class="btn-regresar" onclick="location.href='perfil.html'">
+      <i class="fa fa-arrow-left"></i> Regresar
+    </button>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("form-configuracion");
+      const mensaje = document.getElementById("mensaje-confirmacion");
+      mensaje.style.display = "none";
+      // Cargar datos guardados si existen
+      const datosGuardados = JSON.parse(localStorage.getItem('perfilUsuario') || '{}');
+      if (datosGuardados) {
+        if (datosGuardados.nombre) document.getElementById('nombre').value = datosGuardados.nombre;
+        if (datosGuardados.apellidoPaterno) document.getElementById('apellidoPaterno').value = datosGuardados.apellidoPaterno;
+        if (datosGuardados.apellidoMaterno) document.getElementById('apellidoMaterno').value = datosGuardados.apellidoMaterno;
+        if (datosGuardados.experiencia) document.getElementById('experiencia').value = datosGuardados.experiencia;
+        if (datosGuardados.estudios) document.getElementById('estudios').value = datosGuardados.estudios;
+        if (datosGuardados.ciudad) document.getElementById('ciudad').value = datosGuardados.ciudad;
+        if (datosGuardados.telefono) document.getElementById('telefono').value = datosGuardados.telefono;
+        if (datosGuardados.correo) document.getElementById('correo').value = datosGuardados.correo;
+        if (datosGuardados.sexo) document.getElementById('sexo').value = datosGuardados.sexo;
+        if (datosGuardados.nacimiento) document.getElementById('nacimiento').value = datosGuardados.nacimiento;
+      }
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Guardar datos en localStorage
+        const datos = {
+          nombre: document.getElementById('nombre').value,
+          apellidoPaterno: document.getElementById('apellidoPaterno').value,
+          apellidoMaterno: document.getElementById('apellidoMaterno').value,
+          experiencia: document.getElementById('experiencia').value,
+          estudios: document.getElementById('estudios').value,
+          ciudad: document.getElementById('ciudad').value,
+          telefono: document.getElementById('telefono').value,
+          correo: document.getElementById('correo').value,
+          sexo: document.getElementById('sexo').value,
+          nacimiento: document.getElementById('nacimiento').value
+        };
+        localStorage.setItem('perfilUsuario', JSON.stringify(datos));
+        mensaje.style.display = "block";
+        setTimeout(() => {
+          mensaje.style.display = "none";
+        }, 3000);
+      });
+    });
+
+    function eliminarCuenta() {
+      if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+        alert('Cuenta eliminada (demo).');
+        // Aquí iría la lógica real de eliminación
+      }
+    }
+  </script>
+</body>
+</html>

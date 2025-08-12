@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Hotjar Tracking Code for mi sitio web -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6486284,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <title>Inicio - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    body {
+      background: #000;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 0;
+    }
+    header {
+      background: #181028;
+      color: #fff;
+      padding: 18px 10px 14px 10px;
+      text-align: center;
+      font-size: 1.18rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border-radius: 0 0 18px 18px;
+      margin-bottom: 0;
+      box-shadow: 0 2px 18px #2d0267;
+    }
+    main {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      max-width: 100vw;
+      background: #000;
+      overflow-y: auto;
+      padding-bottom: 70px;
+    }
+    .post-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .post {
+      background: #181028;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #2d0267;
+      padding: 18px 18px 14px 18px;
+      margin: 0 auto 24px auto;
+      border: 1.5px solid #2d0267;
+      width: 100%;
+      max-width: 700px;
+      min-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .post img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      height: 550px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin: 8px 0 18px 0;
+      box-shadow: 0 2px 8px #6d28d9;
+      display: block;
+      background: #222;
+    }
+    .post h3 {
+      font-size: 1.18rem;
+      color: #fff;
+      margin-bottom: 6px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      text-shadow: 0 2px 8px #6d28d9;
+    }
+    .post p {
+      margin: 6px 0;
+      font-size: 1.01rem;
+      color: #e0e7ef;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+    .btn-like, .btn-toggle-comments, .btn-add-comment {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 600;
+      font-size: 0.98rem;
+      box-shadow: 0 2px 8px #6d28d9;
+      margin-right: 6px;
+      margin-bottom: 4px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-like:active, .btn-toggle-comments:active, .btn-add-comment:active {
+      background: #3b2a6d;
+      color: #a78bfa;
+    }
+    .comment-section {
+      margin-top: 8px;
+      padding: 8px 8px;
+      background: #2d0267;
+      border-radius: 12px;
+      border: 1.5px solid #3b2a6d;
+    }
+    .comment-list p {
+      color: #a78bfa;
+      font-size: 0.97rem;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+    .comment-input {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1.5px solid #6d28d9;
+      font-size: 0.98rem;
+      margin-top: 4px;
+      background: #181028;
+      color: #ede9fe;
+    }
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+    .bottom-nav button:active, .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+    @media (min-width: 481px) {
+      main, .post-container, .post {
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 16px;
+      }
+      .bottom-nav {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      width: 100vw;
+      background: #000;
+    }
+    .side-left {
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 220px;
+    }
+    .center-feed {
+      flex: 2 1 700px;
+      max-width: 900px;
+      min-width: 340px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .feed-header {
+      width: 100%;
+      background: #181028;
+      color: #fff;
+      padding: 18px 10px 14px 10px;
+      text-align: center;
+      font-size: 1.18rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border-radius: 0 0 18px 18px;
+      margin-bottom: 0;
+      box-shadow: 0 2px 18px #2d0267;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      position: relative;
+    }
+    .btn-config {
+      background: #2d0267;
+      color: #a78bfa;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      box-shadow: 0 2px 8px #6d28d9;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .search-container {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .search-bar {
+      flex: 1 1 0;
+      min-width: 0;
+      width: 100%;
+      max-width: 340px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: 2px solid #6d28d9;
+      font-size: 1.08rem;
+      background: #181028;
+      color: #fff;
+      margin-right: 4px;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px #2d0267;
+    }
+    .btn-search {
+      background: #6d28d9;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-left: 2px;
+      min-width: 90px;
+    }
+    .btn-search:hover {
+      background: #a78bfa;
+      color: #181028;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout {
+        flex-direction: column;
+      }
+      .center-feed {
+        max-width: 100vw;
+        min-width: 0;
+      }
+      .post-container {
+        max-width: 100vw;
+      }
+      .post {
+        max-width: 98vw;
+        min-width: 0;
+      }
+    }
+    .floating-add-btn {
+      position: fixed;
+      bottom: 90px;
+      right: 40px;
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 4px 24px #2d0267;
+      cursor: pointer;
+      z-index: 200;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .floating-add-btn:hover {
+      background: #a78bfa;
+      color: #23233a;
+      transform: scale(1.08);
+    }
+    .feed-welcome {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 16px;
+      padding: 18px 28px;
+      margin: 32px auto 24px auto;
+      max-width: 700px;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 12px #2d0267;
+      text-align: center;
+      animation: fadeInTab 1s cubic-bezier(0.4,0,0.2,1);
+    }
+    .feed-filtros {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      margin: 18px auto 18px auto;
+      flex-wrap: wrap;
+      max-width: 900px;
+    }
+    .feed-filtros select, .feed-filtros input {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1.5px solid #3b2a6d;
+      background: #181028;
+      color: #ede9fe;
+      font-size: 1.05rem;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    .feed-filtros button {
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.01rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .feed-filtros button:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    .publicacion {
+      background: #181028;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #2d0267;
+      padding: 18px 18px 14px 18px;
+      margin: 0 auto 24px auto;
+      border: 1.5px solid #2d0267;
+      width: 100%;
+      max-width: 700px;
+      min-width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .publicacion img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      height: 550px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin: 8px 0 18px 0;
+      box-shadow: 0 2px 8px #6d28d9;
+      display: block;
+      background: #222;
+    }
+    .publicacion h3 {
+      font-size: 1.18rem;
+      color: #fff;
+      margin-bottom: 6px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+      text-shadow: 0 2px 8px #6d28d9;
+    }
+    .publicacion p {
+      margin: 6px 0;
+      font-size: 1.01rem;
+      color: #e0e7ef;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-layout">
+    <div class="center-feed">
+      <header class="feed-header">
+        <span class="time" id="hora-actual">00:00</span>
+        <div class="search-container">
+          <input class="search-bar" id="search-input" placeholder="Buscar publicaciones, trabajadores..." />
+          <button class="btn-search" onclick="realizarBusqueda()">🔍 Buscar</button>
+        </div>
+      </header>
+      <!-- Elimino la barra de filtros avanzada, mensaje de bienvenida, botón flotante y animaciones -->
+      <!-- Dejo solo el feed de publicaciones como antes -->
+      <main>
+        <div class="post-container">
+          <div id="feed-publicaciones"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Navegación inferior estilo Android -->
+  <nav class="bottom-nav">
+    <button onclick="location.href='home.html'" class="selected">
+      <i class="fa fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    <button onclick="location.href='mensajes.html'">
+      <i class="fa fa-envelope"></i>
+      <span>Mensajes</span>
+    </button>
+    <button onclick="location.href='nueva-publicacion.html'">
+      <i class="fa fa-plus-square"></i>
+      <span>Publicación</span>
+    </button>
+    <button onclick="location.href='perfil.html'">
+      <i class="fa fa-user"></i>
+      <span>Perfil</span>
+    </button>
+  </nav>
+
+  <!-- Agrega este botón donde quieras en tu home.html, por ejemplo debajo del título principal -->
+  <button onclick="window.location.href='suscripciones.html'" style="background:#a78bfa;color:#fff;padding:12px 28px;border:none;border-radius:8px;font-size:1.08rem;font-weight:600;cursor:pointer;margin:24px auto;display:block;">
+    Ver Suscripciones
+  </button>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.appspot.com",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    firebase.firestore().collection("prueba_conexion").get()
+      .then((querySnapshot) => {
+        console.log("¡Firestore conectado! Documentos encontrados:", querySnapshot.size);
+      })
+      .catch((error) => {
+        console.error("Error al conectar con Firestore:", error);
+      });
+  </script>
+  <script src="script.js"></script>
+  <script>
+    /*
+     * FUNCIONALIDAD DE BÚSQUEDA Y FILTROS
+     * 
+     * Este script maneja toda la lógica de búsqueda, filtrado
+     * y visualización de publicaciones en la página principal.
+     */
+
+    // Variables globales para el sistema de filtros
+    let publicacionesOriginales = [];
+    let filtrosActivos = {
+      busqueda: '',
+      oficio: '',
+      ciudad: '',
+      experiencia: '',
+      estudios: '',
+      orden: 'fecha'
+    };
+
+    /**
+     * Carga las publicaciones desde localStorage y las muestra
+     */
+    function cargarPublicaciones() {
+      let publicaciones = JSON.parse(localStorage.getItem('publicaciones') || '[]');
+      
+      // Si no hay publicaciones, crear 3 de ejemplo
+      if (publicaciones.length === 0) {
+        publicaciones = [
+          {
+            nombreCompleto: 'Juan Pérez',
+            oficio: 'Plomero',
+            descripcion: 'Servicios de plomería profesional, reparación de tuberías y instalaciones sanitarias. Más de 5 años de experiencia.',
+            lugar: 'Tula de Allende, Hidalgo',
+            fecha: '15/12/2024, 10:30',
+            likes: 5,
+            comentarios: ['Excelente trabajo', 'Muy profesional'],
+            imagen: 'images/oficio.jpg',
+            fotoPerfil: 'images/user.png'
+          },
+          {
+            nombreCompleto: 'María García',
+            oficio: 'Electricista',
+            descripcion: 'Instalaciones eléctricas residenciales y comerciales, mantenimiento preventivo y reparaciones urgentes.',
+            lugar: 'Tula de Allende, Hidalgo',
+            fecha: '14/12/2024, 15:45',
+            likes: 8,
+            comentarios: ['Muy confiable', 'Precios justos'],
+            imagen: null,
+            fotoPerfil: 'images/user.png'
+          },
+          {
+            nombreCompleto: 'Carlos López',
+            oficio: 'Pintor',
+            descripcion: 'Pintura interior y exterior, acabados finos, trabajos de calidad garantizada. Presupuestos sin compromiso.',
+            lugar: 'Tula de Allende, Hidalgo',
+            fecha: '13/12/2024, 09:15',
+            likes: 12,
+            comentarios: ['Hermoso trabajo', 'Recomendado'],
+            imagen: null,
+            fotoPerfil: 'images/user.png'
+          }
+        ];
+        
+        // Guardar las publicaciones en localStorage
+        localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+      }
+      
+      publicacionesOriginales = [...publicaciones];
+      mostrarPublicacionesFiltradas();
+    }
+
+    /**
+     * Muestra las publicaciones aplicando los filtros activos
+     */
+    function mostrarPublicacionesFiltradas() {
+      let publicacionesFiltradas = [...publicacionesOriginales];
+      
+      // Aplicar filtro de búsqueda por texto
+      if (filtrosActivos.busqueda && filtrosActivos.busqueda.trim() !== '') {
+        const busqueda = filtrosActivos.busqueda.toLowerCase().trim();
+        publicacionesFiltradas = publicacionesFiltradas.filter(pub => {
+          // Buscar en múltiples campos
+          const oficio = (pub.oficio || '').toLowerCase();
+          const descripcion = (pub.descripcion || '').toLowerCase();
+          const lugar = (pub.lugar || '').toLowerCase();
+          const nombreCompleto = (pub.nombreCompleto || '').toLowerCase();
+          
+          return oficio.includes(busqueda) ||
+                 descripcion.includes(busqueda) ||
+                 lugar.includes(busqueda) ||
+                 nombreCompleto.includes(busqueda);
+        });
+      }
+      
+      // Aplicar filtro de oficio específico
+      if (filtrosActivos.oficio && filtrosActivos.oficio.trim() !== '') {
+        publicacionesFiltradas = publicacionesFiltradas.filter(pub => 
+          (pub.oficio || '').toLowerCase() === filtrosActivos.oficio.toLowerCase()
+        );
+      }
+      
+      // Aplicar filtro de ciudad
+      if (filtrosActivos.ciudad && filtrosActivos.ciudad.trim() !== '') {
+        publicacionesFiltradas = publicacionesFiltradas.filter(pub => 
+          (pub.lugar || '').toLowerCase().includes(filtrosActivos.ciudad.toLowerCase())
+        );
+      }
+      
+      // Ordenar resultados según el criterio seleccionado
+      switch (filtrosActivos.orden) {
+        case 'likes':
+          publicacionesFiltradas.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+          break;
+        case 'alfabetico':
+          publicacionesFiltradas.sort((a, b) => (a.oficio || '').localeCompare(b.oficio || ''));
+          break;
+        case 'fecha':
+        default:
+          // Mantener orden original (más recientes primero)
+          break;
+      }
+      
+      const container = document.querySelector('.post-container');
+      
+      // Mostrar información de resultados
+      const resultadosInfo = document.getElementById('resultados-info');
+      if (!resultadosInfo) {
+        const infoDiv = document.createElement('div');
+        infoDiv.id = 'resultados-info';
+        infoDiv.className = 'resultados-info';
+        container.parentNode.insertBefore(infoDiv, container);
+      }
+      
+      const infoDiv = document.getElementById('resultados-info');
+      
+      // Mostrar mensaje cuando no hay publicaciones
+      if (publicacionesOriginales.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 48px; color: var(--text-main);"><h3>No hay publicaciones aún</h3><p>¡Sé el primero en crear una publicación!</p></div>';
+        infoDiv.innerHTML = 'No hay publicaciones disponibles';
+        return;
+      }
+      
+      // Mostrar resultados de búsqueda
+      if (publicacionesFiltradas.length === 0) {
+        container.innerHTML = '<div style="text-align: center; padding: 48px; color: var(--text-main);"><h3>No se encontraron publicaciones</h3><p>Intenta ajustar los filtros de búsqueda</p></div>';
+        infoDiv.innerHTML = `Mostrando 0 de ${publicacionesOriginales.length} publicaciones`;
+      } else {
+        infoDiv.innerHTML = `Mostrando ${publicacionesFiltradas.length} de ${publicacionesOriginales.length} publicaciones`;
+        container.innerHTML = '';
+        
+        // Crear elementos HTML para cada publicación
+        publicacionesFiltradas.forEach((publicacion, index) => {
+          const postDiv = document.createElement('div');
+          postDiv.className = 'post';
+          
+          let imagenHTML = '';
+          let imgSrc = publicacion.imagen ? publicacion.imagen : 'images/oficio.jpg';
+          imagenHTML = `<img src="${imgSrc}" alt="Imagen de la publicación" onerror="this.onerror=null;this.src='images/oficio.jpg';" />`;
+          
+          // Foto de perfil y nombre del usuario
+          let perfilHTML = `<div style='display: flex; align-items: center; gap: 12px; margin-bottom: 8px;'>
+            <img src='${publicacion.fotoPerfil || "images/user.png"}' alt='Foto de perfil' style='width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #eee;'>
+            <span style='font-weight:600;'>${publicacion.nombreCompleto || 'Usuario'}</span> · <span style='color:#888; font-size:0.98em;'>${publicacion.fecha}</span>
+          </div>`;
+          
+          // Generar HTML de la publicación
+          postDiv.innerHTML = `
+            ${perfilHTML}
+            ${imagenHTML}
+            <p><strong>Oficio:</strong> ${publicacion.oficio || 'No especificado'}</p>
+            <p><strong>Descripción:</strong> ${publicacion.descripcion || 'Sin descripción'}</p>
+            <p><strong>Lugar:</strong> ${publicacion.lugar || 'No especificado'}</p>
+            <button class="btn-like" onclick="darLike(${publicacionesOriginales.indexOf(publicacion)})">❤️ <span class="like-count">${publicacion.likes || 0}</span> Me gusta</button>
+            <button class="btn-toggle-comments" onclick="toggleComentarios(${index})">💬 <span class="comment-count">${(publicacion.comentarios || []).length}</span> Comentarios</button>
+            <div class="comment-section" style="display: none;">
+              <div class="comment-list" id="comments-${index}">
+                ${(publicacion.comentarios || []).map(comentario => `<p><strong>Usuario:</strong> ${comentario}</p>`).join('')}
+              </div>
+              <input type="text" class="comment-input" placeholder="Escribe un comentario..." id="comment-input-${index}" />
+              <button class="btn-add-comment" onclick="agregarComentario(${publicacionesOriginales.indexOf(publicacion)})">Enviar</button>
+            </div>
+          `;
+          
+          container.appendChild(postDiv);
+        });
+      }
+    }
+
+    /**
+     * Muestra u oculta el panel de filtros
+     */
+    function toggleFiltros() {
+      const panel = document.getElementById('filtros-panel');
+      const btnFilter = document.querySelector('.btn-filter');
+      
+      if (panel.style.display === 'none') {
+        panel.style.display = 'block';
+        btnFilter.textContent = '❌ Cerrar';
+        btnFilter.style.background = '#dc3545';
+      } else {
+        panel.style.display = 'none';
+        btnFilter.textContent = '⚙️ Filtros';
+        btnFilter.style.background = 'var(--primary)';
+      }
+    }
+
+    /**
+     * Aplica los filtros seleccionados
+     */
+    function aplicarFiltros() {
+      filtrosActivos.busqueda = document.getElementById('search-input').value;
+      filtrosActivos.oficio = document.getElementById('filtro-oficio').value;
+      filtrosActivos.ciudad = document.getElementById('filtro-ciudad').value;
+      filtrosActivos.experiencia = document.getElementById('filtro-experiencia').value;
+      filtrosActivos.estudios = document.getElementById('filtro-estudios').value;
+      filtrosActivos.orden = document.getElementById('filtro-orden').value;
+      
+      mostrarPublicacionesFiltradas();
+      
+      // Cerrar panel de filtros
+      toggleFiltros();
+    }
+
+    /**
+     * Limpia todos los filtros aplicados
+     */
+    function limpiarFiltros() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('filtro-oficio').value = '';
+      document.getElementById('filtro-ciudad').value = '';
+      document.getElementById('filtro-experiencia').value = '';
+      document.getElementById('filtro-estudios').value = '';
+      document.getElementById('filtro-orden').value = 'fecha';
+      
+      filtrosActivos = {
+        busqueda: '',
+        oficio: '',
+        ciudad: '',
+        experiencia: '',
+        estudios: '',
+        orden: 'fecha'
+      };
+      
+      mostrarPublicacionesFiltradas();
+    }
+
+    /**
+     * Realiza una búsqueda explícita con el botón
+     */
+    function realizarBusqueda() {
+      const searchInput = document.getElementById('search-input');
+      filtrosActivos.busqueda = searchInput.value;
+      mostrarPublicacionesFiltradas();
+      
+      // Efecto visual de confirmación
+      const btnSearch = document.querySelector('.btn-search');
+      btnSearch.style.background = '#28a745';
+      btnSearch.textContent = '✅ Buscado';
+      
+      setTimeout(() => {
+        btnSearch.style.background = 'var(--primary)';
+        btnSearch.textContent = '🔍 Buscar';
+      }, 1000);
+    }
+
+    /**
+     * Incrementa el contador de likes de una publicación
+     */
+    function darLike(index) {
+      const publicaciones = JSON.parse(localStorage.getItem('publicaciones') || '[]');
+      publicaciones[index].likes++;
+      localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+      cargarPublicaciones();
+    }
+    
+    /**
+     * Muestra u oculta la sección de comentarios
+     */
+    function toggleComentarios(index) {
+      const commentSection = document.querySelector(`#comments-${index}`).parentElement;
+      commentSection.style.display = commentSection.style.display === 'none' ? 'block' : 'none';
+    }
+    
+    /**
+     * Agrega un nuevo comentario a una publicación
+     */
+    function agregarComentario(index) {
+      const input = document.getElementById(`comment-input-${index}`);
+      const comentario = input.value.trim();
+      
+      if (comentario) {
+        const publicaciones = JSON.parse(localStorage.getItem('publicaciones') || '[]');
+        publicaciones[index].comentarios.push(comentario);
+        localStorage.setItem('publicaciones', JSON.stringify(publicaciones));
+        input.value = '';
+        cargarPublicaciones();
+      }
+    }
+
+    function autocompletarFeed() {
+      // Aquí puedes implementar autocompletado real si tienes datos
+      // Por ahora solo filtra en vivo
+      filtrosActivos.busqueda = document.getElementById('busqueda-feed').value;
+      mostrarPublicacionesFiltradas();
+    }
+    var busquedaFeed = document.getElementById('busqueda-feed');
+    if (busquedaFeed) {
+      busquedaFeed.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') aplicarFiltrosFeed();
+      });
+    }
+    function aplicarFiltrosFeed() {
+      filtrosActivos.busqueda = document.getElementById('busqueda-feed').value;
+      filtrosActivos.oficio = document.getElementById('filtro-oficio').value;
+      filtrosActivos.ciudad = document.getElementById('filtro-ciudad').value;
+      filtrosActivos.orden = document.getElementById('filtro-orden').value;
+      mostrarPublicacionesFiltradas();
+    }
+    function limpiarFiltrosFeed() {
+      document.getElementById('busqueda-feed').value = '';
+      document.getElementById('filtro-oficio').value = '';
+      document.getElementById('filtro-ciudad').value = '';
+      document.getElementById('filtro-orden').value = 'fecha';
+      filtrosActivos.busqueda = '';
+      filtrosActivos.oficio = '';
+      filtrosActivos.ciudad = '';
+      filtrosActivos.orden = 'fecha';
+      mostrarPublicacionesFiltradas();
+    }
+    // Animación al cargar publicaciones
+    function mostrarPublicacionesFiltradas() {
+      // ... tu lógica actual ...
+      // Después de renderizar cada post:
+      document.querySelectorAll('.post').forEach(post => {
+        post.style.opacity = 0;
+        setTimeout(() => { post.style.opacity = 1; }, 100);
+      });
+    }
+
+    // Inicialización cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('search-input');
+      
+      if (searchInput) {
+        // Búsqueda en tiempo real mientras se escribe
+        searchInput.addEventListener('input', function() {
+          filtrosActivos.busqueda = this.value;
+          mostrarPublicacionesFiltradas();
+        });
+        // Permitir búsqueda con la tecla Enter
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            realizarBusqueda();
+          }
+        });
+      }
+      // Cargar publicaciones iniciales
+      cargarPublicaciones();
+    });
+  </script>
+  <script>
+document.addEventListener('DOMContentLoaded', async function() {
+  const feed = document.getElementById('feed-publicaciones');
+  if (!feed) return;
+
+  // Cargar publicaciones desde Firestore
+  const publicacionesRef = firebase.firestore().collection('publicaciones').orderBy('fecha', 'desc');
+  const snapshot = await publicacionesRef.get();
+
+  if (snapshot.empty) {
+    feed.innerHTML = '<p>No hay publicaciones aún.</p>';
+    return;
+  }
+
+  let html = '';
+  snapshot.forEach(doc => {
+    const pub = doc.data();
+    html += `
+      <div class="publicacion">
+        <h3 style="cursor:pointer;color:#a78bfa;text-decoration:underline;" onclick="iniciarChatConUsuario('${pub.correo}','${pub.nombreCompleto || pub.nombre || 'Usuario'}')">${pub.nombreCompleto || 'Anónimo'}</h3>
+        <p><strong>Oficio:</strong> ${pub.oficio || 'No especificado'}</p>
+        <p><strong>Descripción:</strong> ${pub.descripcion}</p>
+        <p><strong>Lugar:</strong> ${pub.lugar}</p>
+        <p><em>${pub.fecha ? new Date(pub.fecha.seconds * 1000).toLocaleString() : ''}</em></p>
+      </div>
+      <hr>
+    `;
+  });
+  feed.innerHTML = html;
+});
+// Función global para iniciar chat
+window.iniciarChatConUsuario = function(correo, nombre) {
+  localStorage.setItem('chat_destinatario_correo', correo);
+  localStorage.setItem('chat_destinatario_nombre', nombre);
+  window.location.href = 'mensajes.html';
+}
+</script>
+</body>
+</html>

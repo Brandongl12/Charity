@@ -1,0 +1,581 @@
+<!-- Página de bienvenida y login -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Hotjar Tracking Code for mi sitio web -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6486284,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+  <meta charset="UTF-8" />
+  <title>Encuentra tu trabajo deseado - Charity</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .insta-bg {
+      min-height: 100vh;
+      width: 100vw;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .insta-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      width: 100vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .insta-left {
+      flex: 1.2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 340px;
+    }
+    .insta-main-img {
+      width: 340px;
+      max-width: 90vw;
+      border-radius: 32px;
+      box-shadow: 0 8px 40px #2d0267;
+      background: #181028;
+      object-fit: cover;
+    }
+    .insta-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 350px;
+    }
+    .insta-card {
+      background: #181028;
+      border-radius: 18px;
+      box-shadow: 0 2px 24px #2d0267;
+      padding: 38px 32px 28px 32px;
+      min-width: 340px;
+      max-width: 370px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .insta-logo-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .insta-title {
+      font-family: 'Segoe Script', 'Pacifico', cursive, sans-serif;
+      font-size: 2.1rem;
+      color: #ede9fe;
+      font-weight: 900;
+      margin-bottom: 2px;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 18px #4c1d95, 0 1px 0 #fff;
+    }
+    .insta-slogan {
+      font-size: 1.01rem;
+      color: #bda6e6;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      text-align: center;
+      text-shadow: 0 1px 8px #6d28d9;
+    }
+    .main-title {
+      color: #ede9fe;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .main-btn, .btn-auth {
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      width: 100%;
+      padding: 13px 0;
+      margin-bottom: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .main-btn:hover, .btn-auth:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+    .form-group label {
+      color: #bda6e6;
+    }
+    .form-group input {
+      background: #000;
+      color: #ede9fe;
+      border: 1.5px solid #3b2a6d;
+      border-radius: 8px;
+      width: 100%;
+      padding: 12px 38px 12px 14px;
+      font-size: 1.05rem;
+      margin-bottom: 2px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #6d28d9;
+      box-shadow: 0 0 0 2px #6d28d9;
+    }
+    .input-icon, .toggle-password {
+      color: #bda6e6;
+    }
+    .login-form-title {
+      color: #bda6e6;
+      text-align: center;
+    }
+    .auth-link a, .help-link a {
+      color: #6d28d9;
+    }
+    .legal-links {
+      color: #bda6e6;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.97rem;
+    }
+    .legal-links a {
+      color: #ede9fe;
+      margin: 0 4px;
+    }
+    .footer-copyright {
+      color: #bda6e6;
+      background: #000;
+      border-top: 1px solid #181028;
+      margin-top: 32px;
+      padding-top: 12px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 900px) {
+      .insta-container {
+        flex-direction: column;
+        min-height: unset;
+      }
+      .insta-left, .insta-right {
+        min-width: unset;
+        width: 100vw;
+        justify-content: center;
+      }
+      .insta-main-img {
+        width: 80vw;
+        max-width: 340px;
+        margin-bottom: 18px;
+      }
+    }
+    .insta-carousel {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      max-width: 90vw;
+      max-height: 90vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 32px;
+      box-shadow: 0 8px 40px #2d0267;
+      opacity: 0;
+      transition: opacity 0.8s;
+      z-index: 1;
+    }
+    .carousel-img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .input-error {
+      border-color: #ff6b6b !important;
+      box-shadow: 0 0 0 2px #ff6b6b44 !important;
+    }
+    .input-success {
+      border-color: #22c55e !important;
+      box-shadow: 0 0 0 2px #22c55e44 !important;
+    }
+    .msg-feedback {
+      margin: 10px 0 0 0;
+      font-size: 1rem;
+      text-align: center;
+      border-radius: 8px;
+      padding: 8px 0;
+      display: none;
+    }
+    .msg-error {
+      background: #ff6b6b22;
+      color: #ff6b6b;
+    }
+    .msg-success {
+      background: #22c55e22;
+      color: #22c55e;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 18px;
+      top: 38px;
+      cursor: pointer;
+      color: #bda6e6;
+      font-size: 1.1rem;
+      z-index: 2;
+    }
+    .loader {
+      border: 4px solid #ede9fe;
+      border-top: 4px solid #6d28d9;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <!-- Iconos de FontAwesome CDN para los inputs -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <div class="insta-bg">
+    <div class="insta-container">
+      <div class="insta-left">
+        <div class="insta-carousel">
+          <img src="images/logoo.png" alt="Logo Charity" class="insta-main-img carousel-img active">
+          <img src="images/comida.jpg" alt="Comida" class="insta-main-img carousel-img">
+          <img src="images/mecanico.jpg" alt="Mecánico" class="insta-main-img carousel-img">
+          <img src="images/costura.jpg" alt="Costura" class="insta-main-img carousel-img">
+          <img src="images/carpinteria.jpg" alt="Carpintería" class="insta-main-img carousel-img">
+        </div>
+      </div>
+      <div class="insta-right">
+        <div class="insta-card">
+          <div class="insta-logo-title">
+            <div class="insta-title">Charity</div>
+            <div class="insta-slogan">CADA EXPERIENCIA CUENTA</div>
+          </div>
+          <div class="main-title">Encuentra tu trabajo deseado</div>
+          <div class="main-buttons">
+            <button class="main-btn btn-login" id="show-login">Iniciar sesión</button>
+            <button class="main-btn btn-register" id="show-register">Registrarse</button>
+          </div>
+          <!-- Login Form -->
+          <div class="login-form-section" id="login-section">
+            <div class="login-form-title">Iniciar Sesión</div>
+            <form id="login-form" onsubmit="event.preventDefault(); iniciarSesion()">
+              <div class="form-group" style="position:relative;">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                <span class="input-icon"><i class="fa fa-envelope"></i></span>
+              </div>
+              <div class="form-group" style="position:relative;">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required placeholder="Tu contraseña">
+                <span class="input-icon"><i class="fa fa-lock"></i></span>
+                <span class="toggle-password" id="toggle-password"><i class="fa fa-eye"></i></span>
+              </div>
+              <div class="loader" id="login-loader"></div>
+              <div class="msg-feedback msg-error" id="login-error"></div>
+              <div class="msg-feedback msg-success" id="login-success"></div>
+              <button type="submit" class="btn-auth">Entrar</button>
+              <div class="auth-link">
+                <a href="#" id="recuperar-link">¿Olvidaste tu contraseña?</a>
+                <span> | </span>
+                <a href="#" id="to-register">¿No tienes cuenta? Regístrate</a>
+              </div>
+            </form>
+          </div>
+          <!-- Registro Form -->
+          <div class="login-form-section" id="register-section" style="display:none;">
+            <div class="login-form-title">Crear una cuenta</div>
+            <form class="auth-form" id="register-form">
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Nombre(s) y apellido(s)" required />
+              </div>
+              <div class="form-group">
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="date" id="fecha" required />
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" placeholder="Ej. 7730000000" required />
+              </div>
+              <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="ejemplo@correo.com" required />
+              </div>
+              <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" placeholder="Calle, ciudad, estado" required />
+              </div>
+              <div class="form-group">
+                <label for="profesion">Profesión</label>
+                <input type="text" id="profesion" placeholder="Ej. Carpintero, Maestra, etc." required />
+              </div>
+              <div class="form-group">
+                <label for="password-registro">Contraseña</label>
+                <input type="password" id="password-registro" placeholder="Crea una contraseña" required />
+              </div>
+              <button type="submit" class="btn-auth">Crear cuenta</button>
+              <div class="auth-link">
+                ¿Ya tienes cuenta? <a href="#" id="to-login">Inicia sesión</a>
+              </div>
+            </form>
+          </div>
+          <div class="legal-links">
+            <a href="#" onclick="alert('Aquí iría el enlace a Términos y condiciones.');return false;">Términos y condiciones</a> ·
+            <a href="#" onclick="alert('Aquí iría el enlace a Política de privacidad.');return false;">Política de privacidad</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer-copyright">&copy; 2024 Charity. Todos los derechos reservados.</footer>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.firebasestorage.app",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    // Función de inicio de sesión (puedes personalizar la lógica)
+    // Mostrar/ocultar contraseña
+    const passwordInput = document.getElementById('password');
+    document.getElementById('toggle-password').addEventListener('click', function() {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        this.innerHTML = '<i class="fa fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = 'password';
+        this.innerHTML = '<i class="fa fa-eye"></i>';
+      }
+    });
+    // Validación visual
+    const emailInput = document.getElementById('email');
+    function setInputState(input, state) {
+      input.classList.remove('input-error', 'input-success');
+      if (state === 'error') input.classList.add('input-error');
+      if (state === 'success') input.classList.add('input-success');
+    }
+    emailInput.addEventListener('blur', function() {
+      if (!this.value.includes('@') || !this.value.includes('.')) {
+        setInputState(this, 'error');
+      } else {
+        setInputState(this, 'success');
+      }
+    });
+    passwordInput.addEventListener('blur', function() {
+      if (this.value.length < 4) {
+        setInputState(this, 'error');
+      } else {
+        setInputState(this, 'success');
+      }
+    });
+    // Feedback visual y loader en login
+    async function iniciarSesion() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      const errorMsg = document.getElementById('login-error');
+      const successMsg = document.getElementById('login-success');
+      const loader = document.getElementById('login-loader');
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'none';
+      loader.style.display = 'block';
+      setTimeout(async () => {
+        loader.style.display = 'none';
+        if (!email || !password) {
+          errorMsg.textContent = 'Por favor completa todos los campos';
+          errorMsg.style.display = 'block';
+          setInputState(emailInput, 'error');
+          setInputState(passwordInput, 'error');
+          return;
+        }
+        if (!email.includes('@') || !email.includes('.')) {
+          errorMsg.textContent = 'Correo electrónico inválido';
+          errorMsg.style.display = 'block';
+          setInputState(emailInput, 'error');
+          return;
+        }
+        if (password.length < 4) {
+          errorMsg.textContent = 'La contraseña debe tener al menos 4 caracteres';
+          errorMsg.style.display = 'block';
+          setInputState(passwordInput, 'error');
+          return;
+        }
+        // Validar usuario y contraseña en Firestore
+        const usuariosRef = firebase.firestore().collection('usuarios');
+        const query = await usuariosRef.where('correo', '==', email).where('password', '==', password).get();
+        if (!query.empty) {
+          localStorage.setItem('usuarioActual', email);
+          successMsg.textContent = '¡Bienvenido! Redirigiendo...';
+          successMsg.style.display = 'block';
+          setInputState(emailInput, 'success');
+          setInputState(passwordInput, 'success');
+          // Guardar inicio de sesión en Firestore
+          if (typeof firebase !== 'undefined' && firebase.firestore) {
+            firebase.firestore().collection('inicios_sesion').add({
+              correo: email,
+              fecha: firebase.firestore.FieldValue.serverTimestamp(),
+              exito: true
+            }).catch((error) => {
+              console.error('Error guardando inicio de sesión:', error);
+            });
+          }
+          setTimeout(() => {
+            window.location.href = 'home.html';
+          }, 1200);
+        } else {
+          errorMsg.textContent = 'Correo o contraseña incorrectos.';
+          errorMsg.style.display = 'block';
+          setInputState(passwordInput, 'error');
+          // Guardar intento fallido en Firestore
+          if (typeof firebase !== 'undefined' && firebase.firestore) {
+            firebase.firestore().collection('inicios_sesion').add({
+              correo: email,
+              fecha: firebase.firestore.FieldValue.serverTimestamp(),
+              exito: false
+            }).catch((error) => {
+              console.error('Error guardando inicio de sesión fallido:', error);
+            });
+          }
+        }
+      }, 900);
+    }
+    // Recuperar contraseña con feedback
+    const recuperarLink = document.getElementById('recuperar-link');
+    recuperarLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      const errorMsg = document.getElementById('login-error');
+      const successMsg = document.getElementById('login-success');
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'none';
+      if (!email) {
+        errorMsg.textContent = 'Ingresa tu correo para recuperar la contraseña.';
+        errorMsg.style.display = 'block';
+        setInputState(emailInput, 'error');
+        return;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        errorMsg.textContent = 'Correo electrónico inválido.';
+        errorMsg.style.display = 'block';
+        setInputState(emailInput, 'error');
+        return;
+      }
+      successMsg.textContent = 'Te hemos enviado instrucciones a tu correo.';
+      successMsg.style.display = 'block';
+      setInputState(emailInput, 'success');
+    });
+
+    // Carrusel animado de imágenes
+    const carouselImages = document.querySelectorAll('.carousel-img');
+    let carouselIndex = 0;
+    setInterval(() => {
+      carouselImages[carouselIndex].classList.remove('active');
+      carouselIndex = (carouselIndex + 1) % carouselImages.length;
+      carouselImages[carouselIndex].classList.add('active');
+    }, 2500);
+
+    // Alternar entre login y registro
+    const loginSection = document.getElementById('login-section');
+    const registerSection = document.getElementById('register-section');
+    document.getElementById('show-login').addEventListener('click', function() {
+      loginSection.style.display = 'block';
+      registerSection.style.display = 'none';
+    });
+    document.getElementById('show-register').addEventListener('click', function() {
+      loginSection.style.display = 'none';
+      registerSection.style.display = 'block';
+    });
+    document.getElementById('to-register').addEventListener('click', function(e) {
+      e.preventDefault();
+      loginSection.style.display = 'none';
+      registerSection.style.display = 'block';
+    });
+    document.getElementById('to-login').addEventListener('click', function(e) {
+      e.preventDefault();
+      loginSection.style.display = 'block';
+      registerSection.style.display = 'none';
+    });
+  </script>
+  <script>
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+      registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre').value.trim();
+        const fecha = document.getElementById('fecha').value;
+        const telefono = document.getElementById('telefono').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const direccion = document.getElementById('direccion').value.trim();
+        const profesion = document.getElementById('profesion').value.trim();
+        const password = document.getElementById('password-registro').value.trim();
+        const fotoInput = document.getElementById('foto');
+        let fotoPerfilUrl = 'images/usuario.jpeg'; // Por defecto
+        // Guarda el usuario en Firestore (usuarios)
+        await firebase.firestore().collection('usuarios').add({
+          nombre,
+          fecha,
+          telefono,
+          correo,
+          direccion,
+          profesion,
+          password,
+          fotoPerfil: fotoPerfilUrl
+        });
+        alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+        // Cambia a la vista de login automáticamente
+        if (loginSection && registerSection) {
+          loginSection.style.display = 'block';
+          registerSection.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html> 

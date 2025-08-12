@@ -1,0 +1,529 @@
+<!-- Página de perfil de usuario: muestra y permite editar la información del usuario -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <!-- Hotjar Tracking Code for mi sitio web -->
+  <script>
+    (function (h, o, t, j, a, r) {
+      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+      h._hjSettings = { hjid: 6486284, hjsv: 6 };
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script'); r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil de Usuario - Charity</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    body {
+      background: #181828;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .main-layout {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+      width: 100vw;
+      background: #181828;
+      overflow-y: auto;
+    }
+
+    .perfil-center {
+      flex: 2 1 700px;
+      max-width: 700px;
+      min-width: 340px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: auto;
+      padding-top: 16px;
+      padding-bottom: 100px;
+      /* espacio para la bottom-nav fija */
+    }
+
+    .perfil-hero {
+      width: 100%;
+      max-width: 900px;
+      height: 160px;
+  background: url('images/cielo.jpg') center/cover no-repeat;
+      border-radius: 18px 18px 0 0;
+      filter: blur(0px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .perfil-card {
+      margin-top: -60px;
+    }
+
+    .perfil-card {
+      background: #23233a;
+      border-radius: 18px;
+      box-shadow: 0 2px 18px #2d0267;
+      padding: 38px 32px 32px 32px;
+      width: 100%;
+      max-width: 420px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .perfil-foto {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 0;
+      margin-bottom: 16px;
+      border: 4px solid #6d28d9;
+      box-shadow: 0 2px 12px #6d28d9;
+    }
+
+    .perfil-card h3 {
+      font-size: 1.35rem;
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 800;
+      margin-top: 0;
+      letter-spacing: 0.2px;
+      text-align: center;
+    }
+
+    .perfil-card p {
+      font-size: 1.05rem;
+      color: #bda6e6;
+      margin: 2px 0;
+      text-align: center;
+      width: 100%;
+      max-width: 100%;
+      font-weight: 500;
+    }
+
+    .btn-configuracion,
+    .btn-cerrar-sesion {
+      width: 100%;
+      max-width: 340px;
+      padding: 14px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.13rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin: 18px auto 0 auto;
+      display: block;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px #6d28d9;
+    }
+
+    .btn-configuracion {
+      background: #6d28d9;
+      color: white;
+    }
+
+    .btn-configuracion:hover {
+      background: #a78bfa;
+      color: #23233a;
+    }
+
+    .btn-cerrar-sesion {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .btn-cerrar-sesion:hover {
+      background: #ff5252;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout {
+        flex-direction: column;
+      }
+
+      .perfil-center {
+        max-width: 100vw;
+        min-width: 0;
+        height: auto;
+        padding-top: 32px;
+        padding-bottom: 90px;
+      }
+
+      .perfil-card {
+        max-width: 98vw;
+        min-width: 0;
+      }
+    }
+
+    /* Navegación inferior estilo Android */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      min-width: 100vw;
+      max-width: 100vw;
+      background: #181028;
+      border-top: 2px solid #6d28d9;
+      display: flex;
+      flex-direction: row;
+      justify-content: stretch;
+      align-items: stretch;
+      padding: 0;
+      z-index: 100;
+      height: 70px;
+      box-shadow: 0 -2px 18px #2d0267;
+      margin: 0;
+      border-radius: 0;
+    }
+
+    .bottom-nav button {
+      flex: 1 1 0;
+      background: none;
+      color: #a78bfa;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-radius: 0;
+      margin: 0;
+      padding: 8px 4px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .bottom-nav button i {
+      font-size: 1.4rem;
+      margin-bottom: 2px;
+    }
+
+    .bottom-nav button:active,
+    .bottom-nav button:focus {
+      background: #2d0267;
+      color: #fff;
+      outline: none;
+    }
+
+    .bottom-nav button:hover {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .bottom-nav button.selected {
+      color: #fff;
+      background: #2d0267;
+    }
+
+    .perfil-badges {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0 18px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge-logro {
+      background: #6d28d9;
+      color: #fff;
+      border-radius: 12px;
+      padding: 4px 14px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      box-shadow: 0 1px 6px #2d0267;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .perfil-actividad {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin: 10px 0 18px 0;
+      font-size: 1.05rem;
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .perfil-opiniones {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 18px 0 18px 0;
+      font-size: 1.01rem;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .perfil-opinion {
+      border-bottom: 1px solid #3b2a6d;
+      padding: 8px 0;
+      margin-bottom: 8px;
+    }
+
+    .perfil-opinion:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .btn-compartir {
+      background: #3b2a6d;
+      color: #ede9fe;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.01rem;
+      font-weight: 700;
+      padding: 10px 18px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin: 10px auto 0 auto;
+      display: block;
+    }
+
+    .btn-compartir:hover {
+      background: #6d28d9;
+      color: #fff;
+    }
+
+    .perfil-historial {
+      background: #23233a;
+      color: #ede9fe;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 18px 0 0 0;
+      font-size: 1.01rem;
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .historial-item {
+      border-bottom: 1px solid #3b2a6d;
+      padding: 8px 0;
+      margin-bottom: 8px;
+    }
+
+    .historial-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .perfil-foto-edit {
+      cursor: pointer;
+      border: 4px solid #a78bfa;
+      transition: border 0.2s;
+    }
+
+    .perfil-foto-edit:hover {
+      border: 4px solid #6d28d9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-layout">
+    <div class="perfil-center">
+      <div class="perfil-card" id="perfil-container">
+        <div class="perfil-hero"></div>
+        <label for="foto-perfil-input" style="cursor:pointer;">
+          <img src="images/usuario.jpeg" alt="Foto de perfil" class="perfil-foto perfil-foto-edit" id="foto-perfil"
+            title="Haz clic para cambiar tu foto" onerror="this.onerror=null;this.src='images/user1.jpg';" />
+          <input type="file" id="foto-perfil-input" accept="image/*" style="display:none;" />
+        </label>
+        <h3 id="nombre-usuario">Nombre del usuario</h3>
+        <div class="perfil-badges">
+          <span class="badge-logro"><i class="fa fa-check-circle"></i> Verificado</span>
+          <span class="badge-logro"><i class="fa fa-trophy"></i> Top 10</span>
+        </div>
+        <div class="perfil-actividad">
+          <span><i class="fa fa-file-alt"></i> <span id="actividad-publicaciones">8</span> publicaciones</span>
+          <span><i class="fa fa-heart"></i> <span id="actividad-likes">24</span> likes</span>
+          <span><i class="fa fa-comments"></i> <span id="actividad-comentarios">12</span> comentarios</span>
+        </div>
+        <!-- Agrega este botón en la sección de perfil en tu perfil.html o donde se muestre la información del usuario -->
+        <a href="suscripciones.html" class="btn-suscripciones"
+          style="background:#a78bfa;color:#fff;padding:10px 22px;border:none;border-radius:8px;font-size:1rem;font-weight:500;text-decoration:none;display:inline-block;margin-top:18px;">
+          Suscripciones
+        </a>
+        <p id="correo-usuario">Correo: </p>
+        <p id="miembro-desde">Miembro desde: Junio 2025</p>
+        <p id="ciudad-usuario">Ciudad: </p>
+        <p id="telefono-usuario">Teléfono: </p>
+        <p id="nacimiento-usuario">Fecha de nacimiento: </p>
+
+        <p id="experiencia-usuario">Experiencia laboral: </p>
+        <button onclick="location.href='configuracion.html'" class="btn-configuracion">
+          <i class="fa fa-cog"></i> Editar perfil
+        </button>
+        <button onclick="cerrarSesion()" class="btn-cerrar-sesion">
+          <i class="fa fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
+        <button class="btn-compartir" onclick="compartirPerfil()"><i class="fa fa-share-alt"></i> Compartir
+          perfil</button>
+        <div class="perfil-opiniones">
+          <strong>Opiniones de otros usuarios:</strong>
+          <div class="perfil-opinion"><i class="fa fa-star" style="color:#ffd700;"></i> “Excelente trabajo, muy
+            profesional.”</div>
+          <div class="perfil-opinion"><i class="fa fa-star" style="color:#ffd700;"></i> “Rápido y confiable, lo
+            recomiendo.”</div>
+        </div>
+        <div class="perfil-historial">
+          <strong>Historial de publicaciones:</strong>
+          <div class="historial-item">Plomero en Tula de Allende <span style="color:#a78bfa;">(12/2024)</span></div>
+          <div class="historial-item">Electricista en Pachuca <span style="color:#a78bfa;">(11/2024)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegación inferior estilo Android -->
+  <nav class="bottom-nav">
+    <button onclick="location.href='home.html'">
+      <i class="fa fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    <button onclick="location.href='mensajes.html'">
+      <i class="fa fa-envelope"></i>
+      <span>Mensajes</span>
+    </button>
+    <button onclick="location.href='nueva-publicacion.html'">
+      <i class="fa fa-plus-square"></i>
+      <span>Publicación</span>
+    </button>
+    <button onclick="location.href='perfil.html'" class="selected">
+      <i class="fa fa-user"></i>
+      <span>Perfil</span>
+    </button>
+  </nav>
+
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_IPUuZcUKPNPR7gJWkg1SpD7UcvFMu3s",
+      authDomain: "charity-6d1de.firebaseapp.com",
+      projectId: "charity-6d1de",
+      storageBucket: "charity-6d1de.appspot.com",
+      messagingSenderId: "302361818428",
+      appId: "1:302361818428:web:f2b3d33a86497a117c1a39",
+      measurementId: "G-YPYBFPP29H"
+    };
+    firebase.initializeApp(firebaseConfig);
+    // Ya puedes usar firebase.firestore()
+  </script>
+  <script>
+    firebase.firestore().collection("prueba_conexion").get()
+      .then((querySnapshot) => {
+        console.log("¡Firestore conectado! Documentos encontrados:", querySnapshot.size);
+      })
+      .catch((error) => {
+        console.error("Error al conectar con Firestore:", error);
+      });
+  </script>
+  <script>
+    function cerrarSesion() {
+      // Limpiar todos los datos de sesión
+      localStorage.removeItem('usuarioActual');
+      localStorage.removeItem('sesionUsuario');
+      sessionStorage.clear();
+      // Redirigir directamente a la página de login
+      location.href = 'iniciar-sesion.html';
+    }
+    // Cargar datos del perfil desde Firestore usando el correo guardado en localStorage
+    document.addEventListener('DOMContentLoaded', async function () {
+      const correoActual = localStorage.getItem('usuarioActual');
+      if (!correoActual) return;
+      try {
+        const usuariosRef = firebase.firestore().collection('usuarios');
+        const query = await usuariosRef.where('correo', '==', correoActual).get();
+        if (!query.empty) {
+          const datos = query.docs[0].data();
+          const nombreUsuario = document.getElementById('nombre-usuario');
+          if (nombreUsuario) nombreUsuario.textContent = datos.nombreCompleto || datos.nombre || 'Nombre del usuario';
+          const correoUsuario = document.getElementById('correo-usuario');
+          if (correoUsuario) correoUsuario.textContent = 'Correo: ' + (datos.correo || '');
+          const ciudadUsuario = document.getElementById('ciudad-usuario');
+          if (ciudadUsuario) ciudadUsuario.textContent = 'Dirección: ' + (datos.direccion || '');
+          const telefonoUsuario = document.getElementById('telefono-usuario');
+          if (telefonoUsuario) telefonoUsuario.textContent = 'Teléfono: ' + (datos.telefono || '');
+          const sexoUsuario = document.getElementById('sexo-usuario');
+          if (sexoUsuario) sexoUsuario.textContent = 'Sexo: ' + (datos.sexo ? datos.sexo.charAt(0).toUpperCase() + datos.sexo.slice(1) : '');
+          const nacimientoUsuario = document.getElementById('nacimiento-usuario');
+          if (nacimientoUsuario) nacimientoUsuario.textContent = 'Fecha de nacimiento: ' + (datos.nacimiento || datos.fecha || '');
+          const experienciaUsuario = document.getElementById('experiencia-usuario');
+          if (experienciaUsuario) experienciaUsuario.textContent = 'Experiencia laboral: ' + (datos.experiencia || '');
+          const estudiosUsuario = document.getElementById('estudios-usuario');
+          if (estudiosUsuario) estudiosUsuario.textContent = 'Estudios: ' + (datos.estudios || '');
+          // Mostrar foto de perfil si existe
+          const fotoPerfil = document.getElementById('foto-perfil');
+          if (fotoPerfil) {
+            if (datos.fotoPerfil) {
+              fotoPerfil.src = datos.fotoPerfil;
+            } else {
+              fotoPerfil.src = 'images/usuario.jpeg';
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error al cargar datos de perfil:', e);
+      }
+    });
+  </script>
+  <script>
+    // Foto de perfil editable con preview
+    const fotoInput = document.getElementById('foto-perfil-input');
+    const fotoPerfil = document.getElementById('foto-perfil');
+    if (fotoInput && fotoPerfil) {
+      fotoInput.addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            fotoPerfil.src = e.target.result;
+          };
+          reader.readAsDataURL(this.files[0]);
+        }
+      });
+    }
+    // Botón compartir perfil
+    function compartirPerfil() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Mi perfil en Charity',
+          text: '¡Mira mi perfil en Charity! Conoce mis servicios y experiencia.',
+          url: window.location.href
+        });
+      } else {
+        alert('Copia y comparte este enlace: ' + window.location.href);
+      }
+    }
+  </script>
+</body>
+
+</html>
